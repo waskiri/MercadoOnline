@@ -1,0 +1,5 @@
+<li>
+    <input type="checkbox" data-bind="click: $parent.addCategory.bind($data, category.id),
+                                        attr: { 'id': 'category_id_'+category.id } "/>
+    <label data-bind="text: category.name, attr: { 'for': 'category_id_'+category.id }"></label>
+</li>

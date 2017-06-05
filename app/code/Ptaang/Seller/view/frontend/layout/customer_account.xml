@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="customer_account_navigation">
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-activate-seller">
+            <arguments>
+                <argument name="path" xsi:type="string">seller/account/activate</argument>
+                <argument name="label" xsi:type="string">I Want To Be A Seller</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-new-product">
+            <arguments>
+                <argument name="path" xsi:type="string">seller/account/newproduct</argument>
+                <argument name="label" xsi:type="string">Add A New Product</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-list-product">
+            <arguments>
+                <argument name="path" xsi:type="string">seller/account/listproduct</argument>
+                <argument name="label" xsi:type="string">My Products</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+</page>

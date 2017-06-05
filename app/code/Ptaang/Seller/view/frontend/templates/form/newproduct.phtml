@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Ptaang\Seller\Block\Form\NewProduct $block */
+?>
+<div id="new-product-form" class="new-product-form" data-bind="scope:'sellernewproduct'">
+    <div class="block-manage-products add-new-products">
+        <div class="form-block">
+            <h3><?php /* @escapeNotVerified */ echo __("Form for add a new Product"); ?></h3>
+            <form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/productPost') ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off">
+                <fieldset class="fieldset info">
+                    <legend class="legend">
+                        <?php /* @escapeNotVerified */ echo __("Product information"); ?>
+                    </legend>
+                    <div class="field field-name required">
+                        <label class="label" for="name"><?php /* @escapeNotVerified */ echo __("Name"); ?></label>
+                         <div class="control">
+                             <input id="name" name="name" class="input-text required-entry" type="text">
+                         </div>
+                    </div>
+                    <div class="field field-sku required" type="text">
+                        <label class="label" for="sku"><?php /* @escapeNotVerified */ echo __("Sku"); ?></label>
+                        <div class="control">
+                            <input id="sku" name="sku" class="input-text required-entry" type="text">
+                        </div>
+                    </div>
+                    <div class="field field-category required">
+                        <label class="label" for="category"><?php /* @escapeNotVerified */ echo __("Category"); ?></label>
+                        <div class="control">
+                            <input id="category" name="category" class="input-text required-entry" type="text" readonly="readonly"
+                                   data-bind="click: showCategoryList, value: newProduct.categorySelected">
+                            <ul class="category-list" data-bind="foreach: { data: newProduct.categoryList, as: 'category' }, visible: newProduct.showCategoryList">
+                                <!-- ko foreach: $parent.getRegion('category') -->
+                                    <!-- ko template: {name: getTemplate(), data: category} --><!-- /ko -->
+                                <!-- /ko -->
+                            </ul>
+                        </div>
+                    </div>
+                </fieldset>
+                <?php echo $this->getChildHtml('form_image') ?>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button class="action save primary" type="submit" title="Save">
+                            <span><?php /* @escapeNotVerified */ echo __("Create Product"); ?></span>
+                        </button>
+                    </div>
+                 </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+           {
+               "#new-product-form": {
+                   "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+               }
+           }
+    </script>
+</div>

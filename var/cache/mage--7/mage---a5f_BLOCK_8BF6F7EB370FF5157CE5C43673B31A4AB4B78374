@@ -1,0 +1,6 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1496619076;s:6:"expire";i:1496622676;s:4:"tags";s:67:"a5f_BLOCK_HTML,a5f_CATALOG_CATEGORY,a5f_CATALOG_CATEGORY_3,a5f_MAGE";}
+
+<nav class="navigation" data-action="navigation">
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+        <li  class="level0 nav-1 first last level-top parent"><a href="http://mercado-virtual.local.com/linea1.html"  class="level-top" ><span>Linea2</span></a><ul class="level0 submenu"><li  class="level1 nav-1-1 first last"><a href="http://mercado-virtual.local.com/linea1/linea3.html" ><span>Linea3</span></a></li></ul></li>            </ul>
+</nav>
