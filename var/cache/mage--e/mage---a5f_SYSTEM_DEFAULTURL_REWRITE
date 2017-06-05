@@ -1,2 +1,0 @@
-a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1496545638;s:6:"expire";i:9999999999;s:4:"tags";s:37:"a5f_CONFIG_SCOPES,a5f_CONFIG,a5f_MAGE";}
-a:1:{s:12:"entity_types";a:3:{s:7:"product";a:1:{s:9:"generator";s:28:"Magento\Framework\DataObject";}s:8:"category";a:1:{s:9:"generator";s:28:"Magento\Framework\DataObject";}s:8:"cms-page";a:1:{s:9:"generator";s:28:"Magento\Framework\DataObject";}}}
