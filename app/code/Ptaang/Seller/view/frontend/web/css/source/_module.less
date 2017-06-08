@@ -3,10 +3,12 @@
 // * See COPYING.txt for license details.
 // */
 
-//
+// '\e630' @icon-delete__content
 //    Common
 //--------------------------------------
 @space_inputs:10px;
+@icon-delete__content: '\e604';
+@icon-size: 16px;
 & when (@media-common = true) {
     #new-product-form {
         .field-category {
@@ -15,7 +17,7 @@
                 .category-list {
                     list-style: outside none none;
                     width: calc(~'(100%-20px)');
-                    border: 1px solid @color-gray76;
+                    border: 1px solid @border-color__base;
                     padding: @space_inputs;
                     position: absolute;
                     z-index: 10;
@@ -39,9 +41,25 @@
                 img{
 
                 }
-                span {
+                .image-options {
                     display: inline-block;
                     width: 100%;
+                    .name-image {
+                        float: left;
+                    }
+                    .actions {
+                        .action.remove {
+                            float: right;
+                            &:before {
+                                content: @icon-delete__content;
+                                font-family: @icons__font-name;
+                                font-size: @icon-size;
+                            }
+                            span {
+                                display: none;
+                            }
+                        }
+                    }
                 }
             }
         }

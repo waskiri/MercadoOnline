@@ -1,4 +1,12 @@
 <li>
-    <img class="img-rounded  thumb" data-bind="attr: { src: imagesFile.src }">
-    <span data-bind="text: imagesFile.name"></span>
+    <img class="img-rounded  thumb" data-bind="attr: { src: imagesFile.src }" />
+    <div class="image-options">
+        <span class="name-image" data-bind="text: imagesFile.name"></span>
+        <div class="actions">
+            <a href="#" class="action remove" title="Delete Image" data-bind="click: $parent.removeImage">
+                <span data-bind="i18n: 'Delete Image'"></span>
+            </a>
+        </div>
+    </div>
+
 </li>

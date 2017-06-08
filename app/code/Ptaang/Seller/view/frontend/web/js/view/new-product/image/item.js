@@ -9,5 +9,8 @@ define([
     return Component.extend({
 
         newProduct: newProduct,
+        removeImage: function (imagesFile) {
+            newProduct.imagesFile.remove(imagesFile);
+        }
     });
 });
