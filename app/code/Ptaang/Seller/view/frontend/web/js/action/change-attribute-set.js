@@ -20,11 +20,16 @@ define(
                         false
                     ).done(
                         function (response) {
+                            console.log(response);
+                            /** Populate the from with the new values */
+                            if(response.true){
+
+                            }
                             newProduct.formLoader(false);
                         }
                     ).fail(
                         function () {
-
+                            newProduct.formLoader(false);
                         }
                     );
         };

@@ -31,20 +31,8 @@ $attributeSet = $block->getAttributeSetIdArray();
                                                                                 event:{ change: selectProductType}"></select>
                         </div>
                     </div>
-                    <div class="field field-name required">
-                        <label class="label" for="name"><?php /* @escapeNotVerified */ echo __("Name"); ?></label>
-                         <div class="control">
-                             <input id="name" name="name" class="input-text required-entry" type="text">
-                         </div>
-                    </div>
-                    <div class="field field-sku required" type="text">
-                        <label class="label" for="sku"><?php /* @escapeNotVerified */ echo __("Sku"); ?></label>
-                        <div class="control">
-                            <input id="sku" name="sku" class="input-text required-entry" type="text">
-                        </div>
-                    </div>
                     <div class="field field-category required">
-                        <label class="label" for="category"><?php /* @escapeNotVerified */ echo __("Category"); ?></label>
+                        <label class="label" for="category"><?php /* @escapeNotVerified */ echo __("Categories"); ?></label>
                         <div class="control">
                             <input id="category" name="category" class="input-text required-entry" type="text" readonly="readonly"
                                    data-bind="click: showCategoryList, value: newProduct.categorySelected">
@@ -55,6 +43,7 @@ $attributeSet = $block->getAttributeSetIdArray();
                             </ul>
                         </div>
                     </div>
+                    <?php echo $this->getChildHtml("form_attributes"); ?>
                 </fieldset>
                 <?php echo $this->getChildHtml('form_image') ?>
                 <fieldset class="fieldset extra-info">

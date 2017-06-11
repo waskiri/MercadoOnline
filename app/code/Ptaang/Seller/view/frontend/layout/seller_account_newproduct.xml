@@ -22,7 +22,8 @@
         <referenceContainer name="content">
             <block class="Ptaang\Seller\Block\Form\NewProduct" name="seller_products" template="Ptaang_Seller::form/newproduct.phtml" cacheable="false">
                 <container name="form.additional.info" as="form_additional_info" />
-                <block class="Ptaang\Seller\Block\Form\Fieldset\Image" name="form_image" template="Ptaang_Seller::form/fieldset/image.phtml" cacheable="false" />
+                <block class="Ptaang\Seller\Block\Form\Fieldset\Image" name="form_image" template="Ptaang_Seller::form/fieldset/image.phtml"  />
+                <block class="Magento\Framework\View\Element\Template" name="form_attributes" template="Ptaang_Seller::form/fieldset/default-attributes.phtml" />
                 <arguments>
                     <argument name="jsLayout" xsi:type="array">
                         <item name="components" xsi:type="array">
@@ -31,10 +32,10 @@
                                 <item name="displayArea" xsi:type="string">sellernewproduct</item>
                                 <item name="children" xsi:type="array">
                                     <item name="category" xsi:type="array">
-                                        <item name="component" xsi:type="string">Ptaang_Seller/js/view/new-product/category</item>
+                                        <item name="component" xsi:type="string">Ptaang_Seller/js/view/fieldset/category</item>
                                         <item name="config" xsi:type="array">
                                             <item name="displayArea" xsi:type="string" translate="true">category</item>
-                                            <item name="template" xsi:type="string">Ptaang_Seller/new-product/category</item>
+                                            <item name="template" xsi:type="string">Ptaang_Seller/fieldset/category</item>
                                         </item>
                                     </item>
                                 </item>
@@ -50,14 +51,14 @@
                 <argument name="jsLayout" xsi:type="array">
                     <item name="components" xsi:type="array">
                         <item name="images" xsi:type="array">
-                            <item name="component" xsi:type="string">Ptaang_Seller/js/view/new-product/image</item>
+                            <item name="component" xsi:type="string">Ptaang_Seller/js/view/fieldset/image</item>
                             <item name="displayArea" xsi:type="string">images</item>
                             <item name="children" xsi:type="array">
                                 <item name="imageItem" xsi:type="array">
-                                    <item name="component" xsi:type="string">Ptaang_Seller/js/view/new-product/image/item</item>
+                                    <item name="component" xsi:type="string">Ptaang_Seller/js/view/fieldset/image/item</item>
                                     <item name="config" xsi:type="array">
                                         <item name="displayArea" xsi:type="string" translate="true">imageItem</item>
-                                        <item name="template" xsi:type="string">Ptaang_Seller/new-product/image/item</item>
+                                        <item name="template" xsi:type="string">Ptaang_Seller/fieldset/image/item</item>
                                     </item>
                                 </item>
                             </item>
