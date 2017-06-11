@@ -7,16 +7,30 @@
 // @codingStandardsIgnoreFile
 
 /** @var \Ptaang\Seller\Block\Form\NewProduct $block */
+$attributeSet = $block->getAttributeSetIdArray();
 ?>
 <div id="new-product-form" class="new-product-form" data-bind="scope:'sellernewproduct'">
     <div class="block-manage-products add-new-products">
         <div class="form-block">
-            <h3><?php /* @escapeNotVerified */ echo __("Form for add a new Product"); ?></h3>
-            <form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/productPost') ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off">
+            <form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/productPost') ?>"
+                  method="post" id="form-validate" enctype="multipart/form-data"
+                  data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off"
+                  data-bind="blockLoader: newProduct.formLoader">
                 <fieldset class="fieldset info">
                     <legend class="legend">
                         <?php /* @escapeNotVerified */ echo __("Product information"); ?>
                     </legend>
+                    <div class="field field-type required">
+                        <label class="label" for="type"><?php /* @escapeNotVerified */ echo __("Choose the type of Product"); ?></label>
+                        <div class="control">
+                            <select id="type" class="required-entry" data-bind="options: newProduct.productTypes,
+                                                                                optionsText: 'name',
+                                                                                optionsValue: 'id',
+                                                                                optionsCaption: $t('Choose your type Product...'),
+                                                                                value: newProduct.selectedProductType,
+                                                                                event:{ change: selectProductType}"></select>
+                        </div>
+                    </div>
                     <div class="field field-name required">
                         <label class="label" for="name"><?php /* @escapeNotVerified */ echo __("Name"); ?></label>
                          <div class="control">
@@ -43,6 +57,11 @@
                     </div>
                 </fieldset>
                 <?php echo $this->getChildHtml('form_image') ?>
+                <fieldset class="fieldset extra-info">
+                    <legend class="legend">
+                        <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
+                    </legend>
+                </fieldset>
                 <div class="actions-toolbar">
                     <div class="primary">
                         <button class="action save primary" type="submit" title="Save">

@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 define([
     'ko',
     'uiComponent',
@@ -10,7 +14,6 @@ define([
 
         newProduct: newProduct,
         addCategory: function(categoryId){
-            console.log(newProduct.multiFileData);
             var categoryString = newProduct.categorySelected();
             var categoryArray  = categoryString.length ===0 ? [] : categoryString.split(",");
             var i = categoryArray.indexOf(categoryId);

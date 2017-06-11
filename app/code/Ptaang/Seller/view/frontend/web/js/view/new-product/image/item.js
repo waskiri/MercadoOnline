@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 define([
     'ko',
     'uiComponent',
