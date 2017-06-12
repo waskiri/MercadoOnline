@@ -1,6 +1,17 @@
 <div class="field required" data-bind="css: 'field-'+attribute.attribute_code">
     <label class="label" data-bind="attr: { for: attribute.attribute_code }, text: attribute.frontend_label"></label>
     <div class="control">
-        <select></select>
+        <select data-bind="options: attribute.options,
+                           optionsText: 'label',
+                           optionsValue: 'value',
+                           css: {
+                                'required-entry': attribute.is_required
+                           },
+                           attr: {
+                                name: 'additional-attribute_'+attribute.attribute_code,
+                                id: attribute.attribute_code,
+                           }">
+
+        </select>
     </div>
 </div>

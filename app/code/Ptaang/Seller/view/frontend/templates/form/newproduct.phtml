@@ -14,7 +14,8 @@
             <form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/productPost') ?>"
                   method="post" id="form-validate" enctype="multipart/form-data"
                   data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off"
-                  data-bind="blockLoader: newProduct.formLoader">
+                  data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                  data-bind="submit:createProduct, blockLoader: newProduct.formLoader">
                 <fieldset class="fieldset info">
                     <legend class="legend">
                         <?php /* @escapeNotVerified */ echo __("Product information"); ?>

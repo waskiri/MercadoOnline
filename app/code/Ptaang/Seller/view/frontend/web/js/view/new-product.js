@@ -56,8 +56,27 @@ define([
             var setAttributeId = this.newProduct.selectedProductType();
             if(setAttributeId > 0){
                 newProduct.formLoader(true);
-                /** Call the controller */
+                /** Call the controller of changefieldset */
                 changeAttributeSet(setAttributeId);
+            }
+        },
+
+        /** Extract the data of the form and send it to the controller of create product */
+        createProduct: function(createProductForm){
+            var self = this;
+            var createProductData = {},
+                formDataArray = $(createProductForm).serializeArray();
+
+            formDataArray.forEach(function (entry) {
+                createProductData[entry.name] = entry.value;
+            });
+            console.log(createProductData);
+            /** Call the controller of create product*/
+            if ($(createProductForm).validation() && $(createProductForm).validation('isValid')) {
+                //newProduct.formLoader(true);
+                /*newsletterAction(newsletterData, true).always(function() {
+                    self.isLoadingNewsletter(false);
+                });*/
             }
         }
 

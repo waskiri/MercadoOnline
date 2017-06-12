@@ -28,6 +28,7 @@ class Changefieldset extends \Magento\Framework\App\Action\Action {
      */
     protected $_collectionAttributeFactory;
 
+
     /**
      * ChangeFieldset constructor.
      * @param \Magento\Framework\App\Action\Context $context
@@ -43,7 +44,7 @@ class Changefieldset extends \Magento\Framework\App\Action\Action {
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
         \Magento\Framework\Json\Helper\Data $helper,
-        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory ){
+        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory){
 
         $this->_collectionAttributeFactory = $collectionAttributeFactory;
         $this->_resultJsonFactory = $resultJsonFactory;
@@ -111,6 +112,9 @@ class Changefieldset extends \Magento\Framework\App\Action\Action {
             $attributeData = $child->getData();
             $attributeCode = $attributeData["attribute_code"];
             if(!in_array($attributeCode, $attributesDefault)){
+                if($attributeData['frontend_input'] == "select"){
+                    $attributeData["options"] = $child->getSource()->getAllOptions();
+                }
                 array_push($attributes, $attributeData);
             }
         }
