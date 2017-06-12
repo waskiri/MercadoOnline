@@ -57,7 +57,6 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
      * @param \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory
-     * @param \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory
      * @param array $layoutProcessors
      * @param array $data
      */

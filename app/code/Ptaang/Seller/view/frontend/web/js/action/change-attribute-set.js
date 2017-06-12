@@ -21,9 +21,17 @@ define(
                     ).done(
                         function (response) {
                             console.log(response);
-                            /** Populate the from with the new values */
-                            if(response.true){
 
+                            /** Populate the form with the new attributes */
+                            newProduct.attributes([]);
+                            if(response.error == false ){
+                                var attributes = response.attributes;
+                                if(attributes.constructor === Array){
+                                    console.log("entro al if");
+                                    newProduct.attributes(attributes);
+                                }else{
+                                    console.log("no entro");
+                                }
                             }
                             newProduct.formLoader(false);
                         }

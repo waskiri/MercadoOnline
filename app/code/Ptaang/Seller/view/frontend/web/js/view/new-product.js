@@ -54,12 +54,10 @@ define([
         /** Change the fieldset of the product */
         selectProductType: function(){
             var setAttributeId = this.newProduct.selectedProductType();
-            newProduct.formLoader(true);
             if(setAttributeId > 0){
+                newProduct.formLoader(true);
                 /** Call the controller */
-                changeAttributeSet(setAttributeId)
-            }else{
-                newProduct.formLoader(false);
+                changeAttributeSet(setAttributeId);
             }
         }
 

@@ -7,7 +7,6 @@
 // @codingStandardsIgnoreFile
 
 /** @var \Ptaang\Seller\Block\Form\NewProduct $block */
-$attributeSet = $block->getAttributeSetIdArray();
 ?>
 <div id="new-product-form" class="new-product-form" data-bind="scope:'sellernewproduct'">
     <div class="block-manage-products add-new-products">
@@ -36,7 +35,8 @@ $attributeSet = $block->getAttributeSetIdArray();
                         <div class="control">
                             <input id="category" name="category" class="input-text required-entry" type="text" readonly="readonly"
                                    data-bind="click: showCategoryList, value: newProduct.categorySelected">
-                            <ul class="category-list" data-bind="foreach: { data: newProduct.categoryList, as: 'category' }, visible: newProduct.showCategoryList">
+                            <ul class="category-list" data-bind="foreach: { data: newProduct.categoryList, as: 'category' },
+                                                                                visible: newProduct.showCategoryList">
                                 <!-- ko foreach: $parent.getRegion('category') -->
                                     <!-- ko template: {name: getTemplate(), data: category} --><!-- /ko -->
                                 <!-- /ko -->
@@ -46,11 +46,18 @@ $attributeSet = $block->getAttributeSetIdArray();
                     <?php echo $this->getChildHtml("form_attributes"); ?>
                 </fieldset>
                 <?php echo $this->getChildHtml('form_image') ?>
-                <fieldset class="fieldset extra-info">
+
+                <fieldset class="fieldset extra-info" data-bind="foreach: { data: newProduct.attributes, as: 'attribute' }">
                     <legend class="legend">
                         <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
                     </legend>
+                    <!-- ko if: (attribute.frontend_input == 'select') -->
+                        <!-- ko foreach: $parent.getRegion('attributeSelect') -->
+                             <!-- ko template: {name: getTemplate(), data: attribute } --><!-- /ko -->
+                         <!-- /ko -->
+                    <!-- /ko -->
                 </fieldset>
+
                 <div class="actions-toolbar">
                     <div class="primary">
                         <button class="action save primary" type="submit" title="Save">

@@ -14,7 +14,8 @@ define([
         showCategoryList: ko.observable(false),
         imagesFile: ko.observableArray([]),
         productTypes: ko.observableArray([]),
-        selectedProductType: ko.observable()
+        selectedProductType: ko.observable(),
+        attributes: ko.observableArray([])
     }
 });
 
