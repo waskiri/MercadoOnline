@@ -2,7 +2,7 @@
     <label class="label" data-bind="attr: { for: attribute.attribute_code }, text: attribute.frontend_label"></label>
     <div class="control">
         <input type="text" data-bind="attr: {
-                                            id: attribute.attribute_code,
+                                            id: 'additional-attribute_'+attribute.attribute_code,
                                             name: attribute.attribute_code
                                       },
                                       css: {
