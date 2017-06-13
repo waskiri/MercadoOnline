@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Ptaang\Seller\Block\Form\Activate $block */
+?>
+<div class="block block-customer-login">
+    <div class="block-title">
+        <strong id="block-seller-activate-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo __('Activate My Account for being a seller') ?></strong>
+    </div>
+    <div class="block-content" aria-labelledby="block-seller-activate-heading">
+        <form class="form form-login"
+              action="<?php /* @escapeNotVerified */ echo ""; ?>"
+              method="post"
+              id="login-form"
+              data-mage-init='{"validation":{}}'>
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <fieldset class="fieldset login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                <div class="field nit required">
+                    <label class="label" for="email"><span><?php /* @escapeNotVerified */ echo __('Nit') ?></span></label>
+                    <div class="control">
+                        <input name="seller[nit]" value="<?php echo $block->escapeHtml("") ?>" type="text" class="input-text" title="<?php /* @escapeNotVerified */ echo __('Nit') ?>"
+                               data-validate="{required:true}">
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary"><button type="submit" class="action activate primary" name="send" id="send2"><span><?php /* @escapeNotVerified */ echo __('Activate Seller Account') ?></span></button></div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

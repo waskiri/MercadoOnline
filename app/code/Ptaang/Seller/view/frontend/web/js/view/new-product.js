@@ -8,9 +8,10 @@ define([
     'jquery',
     'mage/translate',
     'Ptaang_Seller/js/model/new-product',
-    'Ptaang_Seller/js/action/change-attribute-set'
+    'Ptaang_Seller/js/action/change-attribute-set',
+    'Ptaang_Seller/js/action/create-product'
 
-], function (ko,Component, $ , $t, newProduct, changeAttributeSet) {
+], function (ko,Component, $ , $t, newProduct, changeAttributeSet, createProduct) {
     'use strict';
 
     return Component.extend({
@@ -73,10 +74,8 @@ define([
             console.log(createProductData);
             /** Call the controller of create product*/
             if ($(createProductForm).validation() && $(createProductForm).validation('isValid')) {
-                //newProduct.formLoader(true);
-                /*newsletterAction(newsletterData, true).always(function() {
-                    self.isLoadingNewsletter(false);
-                });*/
+                newProduct.formLoader(true);
+                createProduct(createProductData);
             }
         }
 

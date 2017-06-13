@@ -2,8 +2,8 @@
     <label class="label" data-bind="attr: { for: attribute.attribute_code }, text: attribute.frontend_label"></label>
     <div class="control">
         <input type="text" data-bind="attr: {
-                                            id: 'additional-attribute_'+attribute.attribute_code,
-                                            name: attribute.attribute_code
+                                            id: attribute.attribute_code,
+                                            name: 'customAttributes['+attribute.attribute_code+']'
                                       },
                                       css: {
                                            'required-entry': attribute.is_required

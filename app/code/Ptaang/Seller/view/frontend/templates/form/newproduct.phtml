@@ -16,7 +16,7 @@
                   data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" autocomplete="off"
                   data-mage-init='{"validation": {"errorClass": "mage-error"}}'
                   data-bind="submit:createProduct, blockLoader: newProduct.formLoader">
-                <fieldset class="fieldset info">
+                <fieldset class="fieldset info" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
                     <legend class="legend">
                         <?php /* @escapeNotVerified */ echo __("Product information"); ?>
                     </legend>
@@ -69,7 +69,6 @@
             </form>
         </div>
     </div>
-
     <script type="text/x-magento-init">
            {
                "#new-product-form": {
@@ -77,4 +76,5 @@
                }
            }
     </script>
+
 </div>
