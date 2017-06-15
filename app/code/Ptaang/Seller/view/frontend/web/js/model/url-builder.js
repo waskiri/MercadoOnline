@@ -7,9 +7,9 @@ define(
     function($) {
         return {
             method: "rest",
-            storeCode: "0",//window.checkoutConfig.storeCode,
+            storeCode: storeCode,
             version: 'V1',
-            serviceUrl: ':method/:storeCode/:version',
+            serviceUrl: ':method/:version',
 
             createUrl: function(url, params) {
                 var completeUrl = this.serviceUrl + url;

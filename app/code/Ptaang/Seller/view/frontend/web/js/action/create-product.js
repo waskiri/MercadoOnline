@@ -5,7 +5,7 @@
  */
 define(
     [
-        'mage/storage',
+        'Ptaang_Seller/js/lib/storage',
         'Ptaang_Seller/js/model/url-builder',
         'Ptaang_Seller/js/model/new-product'
     ],
@@ -14,11 +14,9 @@ define(
 
         return function (createProductForm) {
 
-            return storage.post(
-                        urlBuilder.createUrl('/products', {}),
-                        JSON.stringify({
-
-                        }),
+            return storage.put(
+                        urlBuilder.createUrl('/products/'+createProductForm.sku, {}),
+                        JSON.stringify({product: createProductForm}),
                         false
                     ).done(
                         function (response) {

@@ -46,6 +46,11 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
      */
     protected $_collectionAttributeFactory;
 
+    /**
+     * @var \Ptaang\Seller\Helper\Data
+     */
+    protected $_helperSeller;
+
 
     /**
      * Constructor
@@ -57,6 +62,7 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
      * @param \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory
+     * @param \Ptaang\Seller\Helper\Data $helperSeller
      * @param array $layoutProcessors
      * @param array $data
      */
@@ -68,10 +74,12 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
         \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory,
+        \Ptaang\Seller\Helper\Data $helperSeller,
         array $layoutProcessors = [],
         array $data = []
     ) {
 
+        $this->_helperSeller = $helperSeller;
         $this->_attributeSetFactory = $attributeSetFactory;
         $this->_storeManager = $context->getStoreManager();
         $this->categoryFactory = $categoryFactory;
@@ -99,6 +107,22 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
             $this->jsLayout["components"]["sellernewproduct"]["productTypes"] = $attributeSetIds;
         }
         return \Zend_Json::encode($this->jsLayout);
+    }
+
+    /**
+     * Get token of the module
+     * @return string
+     */
+    public function getToken(){
+        return $this->_helperSeller->getToken();
+    }
+
+    /**
+     * Get the current website code
+     * @return string
+     */
+    public function getCurrentWebsiteCode(){
+        return $this->_storeManager->getWebsite()->getCode();
     }
 
     /**

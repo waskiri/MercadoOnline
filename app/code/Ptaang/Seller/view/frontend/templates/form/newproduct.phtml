@@ -23,7 +23,7 @@
                     <div class="field field-type required">
                         <label class="label" for="type"><?php /* @escapeNotVerified */ echo __("Choose the type of Product"); ?></label>
                         <div class="control">
-                            <select id="type" class="required-entry" data-bind="options: newProduct.productTypes,
+                            <select id="type" class="required-entry" name="attribute_set_id" data-bind="options: newProduct.productTypes,
                                                                                 optionsText: 'name',
                                                                                 optionsValue: 'id',
                                                                                 optionsCaption: $t('Choose your type Product...'),
@@ -34,7 +34,7 @@
                     <div class="field field-category required">
                         <label class="label" for="category"><?php /* @escapeNotVerified */ echo __("Categories"); ?></label>
                         <div class="control">
-                            <input id="category" name="category" class="input-text required-entry" type="text" readonly="readonly"
+                            <input id="category" name="custom_attributes[category]" class="input-text required-entry" type="text" readonly="readonly"
                                    data-bind="click: showCategoryList, value: newProduct.categorySelected">
                             <ul class="category-list" data-bind="foreach: { data: newProduct.categoryList, as: 'category' },
                                                                                 visible: newProduct.showCategoryList">
@@ -75,6 +75,10 @@
                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
                }
            }
+    </script>
+    <script>
+        storeCode = '<?php /* @escapeNotVerified */ echo $block->getCurrentWebsiteCode(); ?>';
+        token = '<?php /* @escapeNotVerified */ echo $block->getToken(); ?>';
     </script>
 
 </div>

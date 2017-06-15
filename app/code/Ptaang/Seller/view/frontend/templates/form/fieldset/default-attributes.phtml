@@ -19,6 +19,20 @@
 <div class="field field-quantity required">
     <label class="label" for="quantity"><?php /* @escapeNotVerified */ echo __("Quantity"); ?></label>
     <div class="control">
-        <input id="quantity" name="quantity" class="input-text required-entry" type="text">
+        <input id="quantity" name="quantity" class="input-text required-entry" type="text" data-validate="{'validate-number':true}">
+    </div>
+</div>
+
+<div class="field field-description required">
+    <label class="label" for="description"><?php /* @escapeNotVerified */ echo __("Description"); ?></label>
+    <div class="control">
+        <textarea id="description" name="custom_attributes[description]" class="textarea required-entry"  ></textarea>
+    </div>
+</div>
+
+<div class="field field-short_description">
+    <label class="label" for="short_description"><?php /* @escapeNotVerified */ echo __("Short Description"); ?></label>
+    <div class="control">
+        <textarea id="short_description" name="custom_attributes[short_description]" class="textarea"  ></textarea>
     </div>
 </div>
