@@ -34,7 +34,7 @@
                     <div class="field field-category required">
                         <label class="label" for="category"><?php /* @escapeNotVerified */ echo __("Categories"); ?></label>
                         <div class="control">
-                            <input id="category" name="custom_attributes[category]" class="input-text required-entry" type="text" readonly="readonly"
+                            <input id="category" name="custom_attributes[category_ids]" class="input-text required-entry" type="text" readonly="readonly"
                                    data-bind="click: showCategoryList, value: newProduct.categorySelected">
                             <ul class="category-list" data-bind="foreach: { data: newProduct.categoryList, as: 'category' },
                                                                                 visible: newProduct.showCategoryList">

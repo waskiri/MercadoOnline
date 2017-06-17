@@ -64,18 +64,48 @@ define([
 
         /** Extract the data of the form and send it to the controller of create product */
         createProduct: function(createProductForm){
-            var self = this;
-            var createProductData = {},
+
+            var createProductData = {}, customAttributesArray = [], extensionAttributes= {},
                 formDataArray = $(createProductForm).serializeArray();
 
+            /** Retrieve the values from the form */
+            /** Regular Expressions for retrieve the value from the form */
+            var expCustomAttr = /^custom_attributes\[/,
+                expReplaceCustom = /^custom_attributes\[|\]$/gi,
+                expExtensionAttr = /^extension_attributes\[/,
+                expReplaceExt = /^extension_attributes\[|\]$/gi;
+
+            /** Sort the attributes */
             formDataArray.forEach(function (entry) {
-                createProductData[entry.name] = entry.value;
+                var attributeCode = entry.name;
+                if(expCustomAttr.exec(attributeCode)){
+                    var name = attributeCode.replace(expReplaceCustom, "");
+                    customAttributesArray.push({
+                        attribute_code: name, value: entry.value
+                    });
+                }else if(expExtensionAttr.exec(attributeCode)) {
+                    var name = attributeCode.replace(expReplaceExt, "");
+                    if(name == "qty"){
+                        extensionAttributes = {
+                            stockItem : {
+                                qty: entry.value
+                            }
+                        }
+                    }
+                }else{
+                    if(attributeCode == "category_ids"){
+                        createProductData[attributeCode] = (entry.value).split(",");
+                    }else{
+                        createProductData[attributeCode] = entry.value;
+                    }
+
+                }
             });
-            console.log(createProductData);
+
             /** Call the controller of create product*/
             if ($(createProductForm).validation() && $(createProductForm).validation('isValid')) {
                 newProduct.formLoader(true);
-                createProduct(createProductData);
+                createProduct(createProductData, customAttributesArray, extensionAttributes);
             }
         }
 

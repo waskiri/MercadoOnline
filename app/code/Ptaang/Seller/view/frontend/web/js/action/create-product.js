@@ -12,11 +12,15 @@ define(
     function (storage, urlBuilder, newProduct) {
         'use strict';
 
-        return function (createProductForm) {
+        return function (createProductForm, customAttributes, extensionAttributes) {
+            /** prepare the object for be send it by REST */
+            var productObject = { product : createProductForm };
+            productObject.product.extension_attributes = extensionAttributes;
+            productObject.product.custom_attributes =  customAttributes;
 
             return storage.put(
                         urlBuilder.createUrl('/products/'+createProductForm.sku, {}),
-                        JSON.stringify({product: createProductForm}),
+                        JSON.stringify(productObject),
                         false
                     ).done(
                         function (response) {
