@@ -1,5 +1,9 @@
 <li>
-    <img class="img-rounded  thumb" data-bind="attr: { src: imagesFile.src }" />
+    <div class="image-content">
+        <span class="arrow arrow-up" data-bind="click: $parent.upImage"></span>
+            <img class="img-rounded  thumb" data-bind="attr: { src: imagesFile.src }" />
+        <span class="arrow arrow-down" data-bind="click: $parent.downImage"></span>
+    </div>
     <div class="image-options">
         <span class="name-image" data-bind="text: imagesFile.name"></span>
         <div class="actions">

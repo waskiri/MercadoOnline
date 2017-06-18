@@ -8,6 +8,8 @@
 //--------------------------------------
 @space_inputs:10px;
 @icon-delete__content: '\e604';
+@icon-up: '\e621';
+@icon-down: '\e622';
 @icon-size: 16px;
 & when (@media-common = true) {
     #new-product-form {
@@ -38,8 +40,40 @@
                 width: 100%;
                 margin-bottom: @space_inputs;
                 text-align: center;
-                img{
-
+                .image-content {
+                    border: 1px solid @border-color__base;
+                    position: relative;
+                    &:hover .arrow {
+                        display: inline-block;
+                    }
+                    .arrow {
+                        display: none;
+                        width: 100%;
+                        height: 40px;
+                        position: absolute;
+                        background: @color-white;
+                        opacity: 0.5;
+                        left: 0;
+                        cursor: pointer;
+                        &:before {
+                            font-family: @icons__font-name;
+                            font-size: calc(@icon-size*2);
+                        }
+                        &-up{
+                            top: 0;
+                            &:before {
+                                content: @icon-up;
+                            }
+                        }
+                        &-down {
+                            bottom: 0;
+                            &:before {
+                                content: @icon-down;
+                            }
+                        }
+                    }
+                    img{
+                    }
                 }
                 .image-options {
                     display: inline-block;
