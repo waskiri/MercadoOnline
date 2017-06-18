@@ -79,16 +79,15 @@ define([
             formDataArray.forEach(function (entry) {
                 var attributeCode = entry.name;
                 if(expCustomAttr.exec(attributeCode)){
-                    var name = attributeCode.replace(expReplaceCustom, "");
                     customAttributesArray.push({
-                        attribute_code: name, value: entry.value
+                        attribute_code: attributeCode.replace(expReplaceCustom, ""), value: entry.value
                     });
                 }else if(expExtensionAttr.exec(attributeCode)) {
-                    var name = attributeCode.replace(expReplaceExt, "");
-                    if(name == "qty"){
+                    if(attributeCode.replace(expReplaceExt, "") == "qty"){
                         extensionAttributes = {
                             stockItem : {
-                                qty: entry.value
+                                qty: entry.value,
+                                isInStock: true
                             }
                         }
                     }
@@ -101,14 +100,32 @@ define([
 
                 }
             });
-
+            var gallery = this.getGallery();
             /** Call the controller of create product*/
             if ($(createProductForm).validation() && $(createProductForm).validation('isValid')) {
                 newProduct.formLoader(true);
-                createProduct(createProductData, customAttributesArray, extensionAttributes);
+                createProduct(createProductData, customAttributesArray, extensionAttributes, gallery);
             }
+        },
+        /** Get the Gallery Details for sending through  by REST */
+        getGallery: function(){
+            var images = newProduct.imagesFile(), entries = [];
+            for(var i in images){
+                var image = images[i], imageType = image.type;
+
+                entries[i] = {
+                    position: i,
+                    media_type: 'image',
+                    disabled: false,
+                    types: i == 1 ? ['image','small_image','thumbnail'] : [],
+                    content: {
+                        type: imageType,
+                        name: image.name,
+                        base64_encoded_data: image.src.replace("data:"+ imageType+";base64,","")
+                    }
+                }
+            }
+            return entries;
         }
-
-
     });
 });

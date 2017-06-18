@@ -25,7 +25,8 @@ define([
                     return function(e) {
                         newProduct.imagesFile.push({
                             "name": theFile.name,
-                            "src" : e.target.result
+                            "src" : e.target.result,
+                            "type": theFile.type
                         });
                     };
                 })(f);
