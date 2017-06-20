@@ -118,6 +118,13 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
     }
 
     /**
+     * Get the customerId
+     * @return int
+     */
+    public function getCustomerId(){
+        return $this->customerSession->getCustomer()->getId();
+    }
+    /**
      * Get the current website code
      * @return string
      */

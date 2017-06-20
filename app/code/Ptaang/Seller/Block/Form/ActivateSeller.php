@@ -11,7 +11,7 @@ namespace Ptaang\Seller\Block\Form;
  *
  * @SuppressWarnings(PHPMD.DepthOfInheritance)
  */
-class Activate extends \Magento\Customer\Block\Account\Dashboard
+class ActivateSeller extends \Magento\Customer\Block\Account\Dashboard
 {
 
 
@@ -30,7 +30,6 @@ class Activate extends \Magento\Customer\Block\Account\Dashboard
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement
-     * @param \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory
      * @param array $layoutProcessors
      * @param array $data
      */
@@ -40,7 +39,6 @@ class Activate extends \Magento\Customer\Block\Account\Dashboard
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement,
-        \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory,
         array $layoutProcessors = [],
         array $data = []
     ) {
@@ -49,6 +47,7 @@ class Activate extends \Magento\Customer\Block\Account\Dashboard
         $this->layoutProcessors = $layoutProcessors;
         parent::__construct($context, $customerSession, $subscriberFactory, $customerRepository, $customerAccountManagement);
     }
+
 
 
 }

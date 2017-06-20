@@ -20,7 +20,7 @@
         </referenceBlock>
 
         <referenceContainer name="content">
-            <block class="Ptaang\Seller\Block\Form\Activate" name="seller_activate" template="Ptaang_Seller::form/activate.phtml" cacheable="false">
+            <block class="Ptaang\Seller\Block\Form\ActivateSeller" name="seller_activate" template="Ptaang_Seller::form/activate.phtml" cacheable="false">
             </block>
         </referenceContainer>
 

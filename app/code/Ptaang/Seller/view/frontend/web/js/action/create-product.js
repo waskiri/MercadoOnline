@@ -27,13 +27,35 @@ define(
                         false
                     ).done(
                         function (response) {
-                            console.log(response);
-                            newProduct.formLoader(false);
+                            /** if have property Id the product has been Created successfully */
+                            if(response.hasOwnProperty("id")){
+                                var idProduct = response.id, customerId = urlBuilder.getCustomerId();
+                                /** call the controller */
+                                storage.post(
+                                    'seller/account/saveproduct',
+                                    JSON.stringify({
+                                        productId: idProduct,
+                                        customerId: customerId
+                                    }),
+                                    false
+                                ).done(
+                                    function (response) {
+                                        console.log(response);
+                                        newProduct.formLoader(false);
+                                    }
+                                ).fail(
+                                    function () {
+                                        newProduct.formLoader(false);
+                                    }
+                                );
+                            /** End call to the second controller */
+                            }else{
+                                newProduct.formLoader(false);
+                            }
                         }
                     ).fail(
                         function () {
                             newProduct.formLoader(false);
-                            console.log(urlBuilder.createUrl('/products', {}));
                         }
                     );
         };

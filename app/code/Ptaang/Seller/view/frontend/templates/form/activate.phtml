@@ -6,7 +6,7 @@
 
 // @codingStandardsIgnoreFile
 
-/** @var \Ptaang\Seller\Block\Form\Activate $block */
+/** @var $block \Ptaang\Seller\Block\Form\Activate $block */
 ?>
 <div class="block block-customer-login">
     <div class="block-title">
@@ -14,7 +14,7 @@
     </div>
     <div class="block-content" aria-labelledby="block-seller-activate-heading">
         <form class="form form-login"
-              action="<?php /* @escapeNotVerified */ echo ""; ?>"
+              action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/activatepost'); ?>"
               method="post"
               id="login-form"
               data-mage-init='{"validation":{}}'>

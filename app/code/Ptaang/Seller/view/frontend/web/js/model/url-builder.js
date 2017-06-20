@@ -10,6 +10,12 @@ define(
             storeCode: storeCode,
             version: 'V1',
             serviceUrl: ':method/:version',
+            customerId: customerId,
+
+            /** return the customer Id */
+            getCustomerId: function(){
+                return this.customerId;
+            },
 
             createUrl: function(url, params) {
                 var completeUrl = this.serviceUrl + url;
