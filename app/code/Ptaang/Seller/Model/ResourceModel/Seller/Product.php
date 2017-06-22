@@ -19,26 +19,28 @@ class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
     /**
      * Load the seller_product entity given a customerId and customerId
      * @param \Ptaang\Seller\Model\Seller\Product $sellerProduct
-     * @param int $customerId
+     * @param int $sellerId
      * @param int $productId
      * @return \Ptaang\Seller\Model\Seller\Product
      */
 
-    public function loadBySellerProduct(\Ptaang\Seller\Model\Seller\Product $sellerProduct, $customerId)
+    public function loadBySellerProduct(\Ptaang\Seller\Model\Seller\Product $sellerProduct, $sellerId, $productId)
     {
         $connection = $this->getConnection();
-        $bind = ['customer_id' => $customerId];
+
         $select = $connection->select()->from(
             $this->getMainTable()
         )->where(
-            'customer_id = :customer_id'
+            'seller_id = :seller_id'
+        )->where(
+            'product_id = :product_id'
         );
 
-        $sellerProductId = $connection->fetchOne($select, $bind);
+        $sellerProductId = $connection->fetchOne($select, [':seller_id' => $sellerId, ':product_id' => $productId]);
         if ($sellerProductId) {
             $this->load($sellerProduct, $sellerProductId);
         } else {
-            $sellerId->setData([]);
+            $sellerProduct->setData([]);
         }
         return $this;
     }
