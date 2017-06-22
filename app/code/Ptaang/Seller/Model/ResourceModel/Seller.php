@@ -37,7 +37,7 @@ class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
         if ($sellerId) {
             $this->load($seller, $sellerId);
         } else {
-            $sellerId->setData([]);
+            $seller->setData([]);
         }
         return $this;
     }

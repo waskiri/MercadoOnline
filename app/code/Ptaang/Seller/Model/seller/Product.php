@@ -18,7 +18,7 @@ class Product extends \Magento\Framework\Model\AbstractModel {
     }
 
     /**
-     * Load the Seller given a customerId
+     * Load the seller_product entity given a customerId and customerId
      * @param int $customerId
      * @param int $productId
      * @return \Ptaang\Seller\Model\Seller\Product
