@@ -7,12 +7,14 @@ namespace Ptaang\Seller\Model\ResourceModel;
 
 class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
     
+    protected $_request;
+    
     /**
      * Resource initialization
      *
      * @return void
      */
-    protected function _construct()
+    public function _construct()
     {
         $this->_init('seller_entity', 'entity_id');
     }
@@ -37,7 +39,8 @@ class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
         if ($sellerId) {
             $this->load($seller, $sellerId);
         } else {
-            $sellerId->setData([]);
+            //$sellerId->setData([]);
+                                        
         }
         return $this;
     }

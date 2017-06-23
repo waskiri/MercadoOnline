@@ -1,1 +1,0 @@
-/var/www/html/MercadoVirtual/vendor/magento/module-checkout/view/frontend/web/js/sidebar.js

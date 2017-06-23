@@ -29,6 +29,11 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
      * @var \Ptaang\Seller\Model\SellerFactory
      */
     protected $sellerFactory;
+    
+    /**
+     * @var MessageManager
+     */
+    protected $_messageManager;
 
     /**
      * @param Context $context
@@ -49,6 +54,7 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
         $this->session = $customerSession;
         $this->resultPageFactory = $resultPageFactory;
         $this->customerRepository = $customerRepository;
+        $this->_messageManager = $context->getMessageManager();
         parent::__construct($context);
     }
 
@@ -70,12 +76,31 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
         $seller     = $this->sellerFactory->create()->loadByCustomerId($customerId);
         if($seller && $seller->getId()){ //The Seller exists
             //redirect before
+            $this->_messageManager->addNotice('Your nit is already in the validation process');
         }else{
             //save the information in the seller table
+            $seller_params = $params['seller'];
+            try{
+                $seller->setData(
+                            array(
+                                'customer_id' => $customerId, 
+                                //'phone_mobile' => null, 
+                                //'phone_home' => null, 
+                                'nit' => $seller_params['nit']
+                                )
+                            )->save();
+                            
+                $this->_messageManager->addSuccess(__("Your nit was added to be a seller, you will receive an email to confirm your activation."));
+            }catch (Exception $e){
+                $this->_messageManager->addError(__('Unexpected error', $e));
+            }
+            
+            
         }
-        echo "<pre>";
-        print_r($params);
-        echo "</pre>";
-        return $resultPage;
+        //echo "<pre>";
+        //print_r($params);
+        //echo "</pre>";
+        //return $resultPage;
+        $this->_redirect('customer/account');
     }
 }

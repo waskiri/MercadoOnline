@@ -1,1 +1,0 @@
-/var/www/html/MercadoVirtual/lib/web/jquery/jquery.validate.js
