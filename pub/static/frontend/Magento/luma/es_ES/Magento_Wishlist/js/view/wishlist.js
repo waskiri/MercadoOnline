@@ -1,1 +1,0 @@
-/var/www/html/MercadoVirtual/vendor/magento/module-wishlist/view/frontend/web/js/view/wishlist.js
