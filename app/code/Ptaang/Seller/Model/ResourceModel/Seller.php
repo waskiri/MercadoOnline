@@ -25,7 +25,7 @@ class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
      * @param int $customerId
      * @return \Ptaang\Seller\Model\Seller
      */
-    public function loadByCp(\Ptaang\Seller\Model\Seller $seller, $customerId)
+    public function loadByCustomerId(\Ptaang\Seller\Model\Seller $seller, $customerId)
     {
         $connection = $this->getConnection();
         $bind = ['customer_id' => $customerId];
@@ -39,8 +39,7 @@ class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
         if ($sellerId) {
             $this->load($seller, $sellerId);
         } else {
-            //$sellerId->setData([]);
-                                        
+            $seller->setData([]);
         }
         return $this;
     }

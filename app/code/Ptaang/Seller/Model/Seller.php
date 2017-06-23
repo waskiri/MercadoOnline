@@ -23,7 +23,7 @@ class Seller extends \Magento\Framework\Model\AbstractModel {
      * @return \Ptaang\Seller\Model\Seller
      */
     public function loadByCustomerId($customerId){
-        $this->_getResource()->loadByCp($this, $customerId);
+        $this->_getResource()->loadByCustomerId($this, $customerId);
         return $this;
     }
 }

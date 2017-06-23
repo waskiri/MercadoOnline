@@ -20,8 +20,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _construct()
     {
         $this->_init(
-            'Ptaang\Seller\Model\Seller',
-            'Ptaang\Seller\Model\ResourceModel\Seller'
+            'Ptaang\Seller\Model\Seller\Product',
+            'Ptaang\Seller\Model\ResourceModel\Seller\Product'
         );
     }
 }
