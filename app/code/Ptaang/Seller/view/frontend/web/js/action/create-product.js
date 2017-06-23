@@ -29,13 +29,13 @@ define(
                         function (response) {
                             /** if have property Id the product has been Created successfully */
                             if(response.hasOwnProperty("id")){
-                                var idProduct = response.id, customerId = urlBuilder.getCustomerId();
+                                var idProduct = response.id, sellerId = urlBuilder.getSellerId();
                                 /** call the controller */
                                 storage.post(
                                     'seller/account/saveproduct',
                                     JSON.stringify({
                                         productId: idProduct,
-                                        customerId: customerId
+                                        sellerId: sellerId
                                     }),
                                     false
                                 ).done(

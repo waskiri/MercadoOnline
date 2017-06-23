@@ -23,7 +23,10 @@ class Saveproduct extends \Magento\Framework\App\Action\Action {
      */
     protected $_helper;
 
-
+    /**
+     * @var \Ptaang\Seller\Model\Seller\Product
+     */
+    protected $_sellerProductFactory;
 
     /**
      * Saveproduct constructor.
@@ -31,13 +34,16 @@ class Saveproduct extends \Magento\Framework\App\Action\Action {
      * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
      * @param \Magento\Framework\Controller\Result\RawFactory $resultRawFactory
      * @param \Magento\Framework\Json\Helper\Data $helper
+     * @param \Ptaang\Seller\Model\Seller\ProductFactory $productSellerFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
-        \Magento\Framework\Json\Helper\Data $helper){
+        \Magento\Framework\Json\Helper\Data $helper,
+        \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory){
 
+        $this->_sellerProductFactory = $sellerProductFactory;
         $this->_resultJsonFactory = $resultJsonFactory;
         $this->_resultRawFactory  = $resultRawFactory;
         $this->_helper            = $helper;
@@ -64,10 +70,11 @@ class Saveproduct extends \Magento\Framework\App\Action\Action {
         }
         $response = [];
         $response["error"] = true;
-        if(isset($productInformation["productId"]) && isset($productInformation["customerId"])){
+        if(isset($productInformation["productId"]) && isset($productInformation["sellerId"])){
             $productId = $productInformation["productId"];
-            $customerId = $productInformation["customerId"];
-
+            $sellerId = $productInformation["sellerId"];
+            $sellerProductEntity = $this->_sellerProductFactory->create();
+            $sellerProductEntity->loadBySellerProduct($productId, $sellerId);
         }
 
 

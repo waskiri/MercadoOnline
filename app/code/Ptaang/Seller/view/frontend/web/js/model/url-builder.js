@@ -10,11 +10,11 @@ define(
             storeCode: storeCode,
             version: 'V1',
             serviceUrl: ':method/:version',
-            customerId: customerId,
+            sellerId: sellerId,
 
             /** return the customer Id */
-            getCustomerId: function(){
-                return this.customerId;
+            getSellerId: function(){
+                return this.sellerId;
             },
 
             createUrl: function(url, params) {

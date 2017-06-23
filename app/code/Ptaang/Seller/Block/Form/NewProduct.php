@@ -118,11 +118,11 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
     }
 
     /**
-     * Get the customerId
+     * Get the sellerId, given the customer Id
      * @return int
      */
-    public function getCustomerId(){
-        return $this->customerSession->getCustomer()->getId();
+    public function getSellerId(){
+        return $this->_helperSeller->getSellerId($this->customerSession->getCustomer()->getId());
     }
     /**
      * Get the current website code
