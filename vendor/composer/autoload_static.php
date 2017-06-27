@@ -124,6 +124,8 @@ class ComposerStaticInitbeaa23c4aadcccfd8d625e1323a8eebc
         '4137e072aca869574ccb2dd0da693e02' => __DIR__ . '/..' . '/magento/module-advanced-pricing-import-export/registration.php',
         '1158fd4355efa1508f87cf82bdcd70ac' => __DIR__ . '/..' . '/magento/module-admin-notification/registration.php',
         'ecb8e9b41f51c277a87468608b694cd4' => __DIR__ . '/..' . '/magento/module-marketplace/registration.php',
+        '741a77384208506d7dd06ba65b54981c' => __DIR__ . '/..' . '/mageplaza/core-m2/registration.php',
+        'bfcd7b977e821ec6d1fec907ec0c0af8' => __DIR__ . '/..' . '/mageplaza/magento-2-spanish-language-pack/registration.php',
         'b4cf39431a4b949eea8aa69ebb3d39da' => __DIR__ . '/../..' . '/app/etc/NonComposerComponentRegistration.php',
     );
 
@@ -186,6 +188,7 @@ class ComposerStaticInitbeaa23c4aadcccfd8d625e1323a8eebc
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mageplaza\\Core\\' => 15,
             'Magento\\Wishlist\\' => 17,
             'Magento\\Widget\\' => 15,
             'Magento\\Weee\\' => 13,
@@ -499,6 +502,10 @@ class ComposerStaticInitbeaa23c4aadcccfd8d625e1323a8eebc
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Mageplaza\\Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mageplaza/core-m2',
         ),
         'Magento\\Wishlist\\' => 
         array (

@@ -123,5 +123,7 @@ return array(
     '4137e072aca869574ccb2dd0da693e02' => $vendorDir . '/magento/module-advanced-pricing-import-export/registration.php',
     '1158fd4355efa1508f87cf82bdcd70ac' => $vendorDir . '/magento/module-admin-notification/registration.php',
     'ecb8e9b41f51c277a87468608b694cd4' => $vendorDir . '/magento/module-marketplace/registration.php',
+    '741a77384208506d7dd06ba65b54981c' => $vendorDir . '/mageplaza/core-m2/registration.php',
+    'bfcd7b977e821ec6d1fec907ec0c0af8' => $vendorDir . '/mageplaza/magento-2-spanish-language-pack/registration.php',
     'b4cf39431a4b949eea8aa69ebb3d39da' => $baseDir . '/app/etc/NonComposerComponentRegistration.php',
 );

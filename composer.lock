@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "10a3f6b6c63d3859a7999507269ef7e6",
-    "content-hash": "64699f7a24f3e0d5168ae7fbe976d32e",
+    "hash": "f0f9d5878a63d10b87c909fed92a48fd",
+    "content-hash": "cf3d29671fa574e9a31ed30798bd800a",
     "packages": [
         {
             "name": "braintree/braintree_php",
@@ -5392,6 +5392,84 @@
             "time": "2017-02-27 21:19:07"
         },
         {
+            "name": "mageplaza/core-m2",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mageplaza/module-core.git",
+                "reference": "3f1a4d656f28099ea0569d8d9403e1074d452fc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mageplaza/module-core/zipball/3f1a4d656f28099ea0569d8d9403e1074d452fc3",
+                "reference": "3f1a4d656f28099ea0569d8d9403e1074d452fc3",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Mageplaza\\Core\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Mageplaza",
+                    "email": "hi@mageplaza.com",
+                    "homepage": "https://www.mageplaza.com",
+                    "role": "Leader"
+                }
+            ],
+            "description": "Mageplaza Core M2",
+            "time": "2017-04-12 08:07:22"
+        },
+        {
+            "name": "mageplaza/magento-2-spanish-language-pack",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mageplaza/magento-2-spanish-language-pack.git",
+                "reference": "11bc99ba187aeb8f14e109565c02622d9890d8cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mageplaza/magento-2-spanish-language-pack/zipball/11bc99ba187aeb8f14e109565c02622d9890d8cc",
+                "reference": "11bc99ba187aeb8f14e109565c02622d9890d8cc",
+                "shasum": ""
+            },
+            "require": {
+                "mageplaza/core-m2": "~1.3.0|dev-master"
+            },
+            "type": "magento2-language",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mageplaza team",
+                    "email": "hi@mageplaza.com",
+                    "homepage": "https://www.mageplaza.com",
+                    "role": "Leader"
+                }
+            ],
+            "description": "Spanish language package for Magento 2",
+            "homepage": "https://www.mageplaza.com",
+            "time": "2017-05-29 02:01:14"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.16.0",
             "source": {
@@ -9187,6 +9265,7 @@
     "minimum-stability": "alpha",
     "stability-flags": {
         "composer/composer": 15,
+        "mageplaza/magento-2-spanish-language-pack": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": true,

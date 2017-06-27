@@ -50,6 +50,7 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Pelago\\' => array($vendorDir . '/pelago/emogrifier/Classes'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Mageplaza\\Core\\' => array($vendorDir . '/mageplaza/core-m2'),
     'Magento\\Wishlist\\' => array($vendorDir . '/magento/module-wishlist'),
     'Magento\\Widget\\' => array($vendorDir . '/magento/module-widget'),
     'Magento\\Weee\\' => array($vendorDir . '/magento/module-weee'),

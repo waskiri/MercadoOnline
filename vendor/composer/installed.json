@@ -9566,5 +9566,87 @@
             "oauth",
             "security"
         ]
+    },
+    {
+        "name": "mageplaza/core-m2",
+        "version": "1.3.1",
+        "version_normalized": "1.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mageplaza/module-core.git",
+            "reference": "3f1a4d656f28099ea0569d8d9403e1074d452fc3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mageplaza/module-core/zipball/3f1a4d656f28099ea0569d8d9403e1074d452fc3",
+            "reference": "3f1a4d656f28099ea0569d8d9403e1074d452fc3",
+            "shasum": ""
+        },
+        "time": "2017-04-12 08:07:22",
+        "type": "magento2-module",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "registration.php"
+            ],
+            "psr-4": {
+                "Mageplaza\\Core\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "OSL-3.0",
+            "AFL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Mageplaza",
+                "email": "hi@mageplaza.com",
+                "homepage": "https://www.mageplaza.com",
+                "role": "Leader"
+            }
+        ],
+        "description": "Mageplaza Core M2"
+    },
+    {
+        "name": "mageplaza/magento-2-spanish-language-pack",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mageplaza/magento-2-spanish-language-pack.git",
+            "reference": "11bc99ba187aeb8f14e109565c02622d9890d8cc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mageplaza/magento-2-spanish-language-pack/zipball/11bc99ba187aeb8f14e109565c02622d9890d8cc",
+            "reference": "11bc99ba187aeb8f14e109565c02622d9890d8cc",
+            "shasum": ""
+        },
+        "require": {
+            "mageplaza/core-m2": "~1.3.0|dev-master"
+        },
+        "time": "2017-05-29 02:01:14",
+        "type": "magento2-language",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "registration.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mageplaza team",
+                "email": "hi@mageplaza.com",
+                "homepage": "https://www.mageplaza.com",
+                "role": "Leader"
+            }
+        ],
+        "description": "Spanish language package for Magento 2",
+        "homepage": "https://www.mageplaza.com"
     }
 ]
