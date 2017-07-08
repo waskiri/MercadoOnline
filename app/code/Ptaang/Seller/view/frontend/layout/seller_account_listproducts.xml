@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="seller_account_products_head_components" template="Magento_Customer::js/components.phtml"/>
+        </referenceBlock>
+
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Edit Product</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Ptaang\Seller\Block\Collection\ListProducts" name="list_products" template="Ptaang_Seller::collection/list/products.phtml" cacheable="false">
+
+            </block>
+        </referenceContainer>
+
+
+    </body>
+</page>
