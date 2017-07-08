@@ -70,13 +70,24 @@ class Saveproduct extends \Magento\Framework\App\Action\Action {
         }
         $response = [];
         $response["error"] = true;
+        $response["message"] = "";
         if(isset($productInformation["productId"]) && isset($productInformation["sellerId"])){
-            $productId = $productInformation["productId"];
-            $sellerId = $productInformation["sellerId"];
+            $productId = (int)$productInformation["productId"];
+            $sellerId =  (int)$productInformation["sellerId"];
             $sellerProductEntity = $this->_sellerProductFactory->create();
             $sellerProductEntity->loadBySellerProduct($productId, $sellerId);
+            if(!$sellerProductEntity->getId()){
+                $sellerProductEntity->setData('seller_id', $sellerId);
+                $sellerProductEntity->setData('product_id', $productId);
+                $sellerProductEntity->save();
+                $response["error"] = false;
+                $response["message"] = __("Save the product successfully");
+            }else{
+                $response["message"] = __("The product is associated to Seller");
+            }
+        }else{
+            $response["message"] = __("Exist a problem ");
         }
-
 
         $result = $this->_resultJsonFactory->create();
         return $result->setData($response);

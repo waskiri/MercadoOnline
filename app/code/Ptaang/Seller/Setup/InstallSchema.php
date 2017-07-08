@@ -123,11 +123,11 @@ class InstallSchema implements InstallSchemaInterface
             $setup->getFkName(
                 'seller_product',
                 'product_id',
-                'product_entity',
+                'catalog_product_entity',
                 'entity_id'
             ),
             'product_id',
-            $setup->getTable('product_entity'),
+            $setup->getTable('catalog_product_entity'),
             'entity_id',
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         )->setComment(

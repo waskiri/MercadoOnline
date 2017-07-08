@@ -100,6 +100,15 @@ define([
 
                 }
             });
+            /** Generate the URL of the Product, because I got an error when send empty */
+            if(createProductData.hasOwnProperty("sku") &&
+                        createProductData.hasOwnProperty("name")){
+                var url = this.getUrlProduct(createProductData["sku"], createProductData["name"]);
+                customAttributesArray.push({
+                    attribute_code: "url_key", value: url
+                });
+            }
+
             var gallery = this.getGallery();
             /** Call the controller of create product*/
             if ($(createProductForm).validation() && $(createProductForm).validation('isValid')) {
@@ -126,6 +135,11 @@ define([
                 }
             }
             return entries;
+        },
+        /** Generate the Url of the Product Given a Name and an SKU */
+        getUrlProduct: function(name, sku){
+            var nameProduct = name.trim(), skuProduct = sku.trim();
+            return nameProduct.toLowerCase()+"-"+skuProduct.toLowerCase();
         }
     });
 });
