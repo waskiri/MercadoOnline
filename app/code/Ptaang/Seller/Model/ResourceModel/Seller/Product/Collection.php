@@ -3,7 +3,7 @@
  * Copyright © 2017 Ptaang, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Ptaang\Seller\Model\ResourceModel\Seller;
+namespace Ptaang\Seller\Model\ResourceModel\Seller\Product;
 
 /**
  * Seller collection

@@ -31,6 +31,11 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
     protected $_helperSeller;
 
     /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+     */
+    protected $_productCollectionFactory;
+
+    /**
      * Constructor
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -40,6 +45,7 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
      * @param \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement
      * @param \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory
      * @param \Ptaang\Seller\Helper\Data $helperSeller
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -48,19 +54,75 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement,
         \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory,
-        \Ptaang\Seller\Helper\Data $helperSeller
+        \Ptaang\Seller\Helper\Data $helperSeller,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
 
     ) {
+        $this->_productCollectionFactory = $productCollectionFactory;
         $this->_helperSeller = $helperSeller;
         $this->_sellerProductFactory = $sellerProductFactory;
         $this->_storeManager = $context->getStoreManager();
         parent::__construct($context, $customerSession, $subscriberFactory, $customerRepository, $customerAccountManagement);
     }
 
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+        $this->pageConfig->getTitle()->set(__('List Products'));
+
+
+        if ($this->getProducts()) {
+            $pager = $this->getLayout()->createBlock(
+                'Magento\Theme\Block\Html\Pager',
+                'seller.product.list.pager'
+            )->setAvailableLimit(array(5=>5,10=>10,15=>15))->setShowPerPage(true)->setCollection(
+                $this->getProducts()
+            );
+            $this->setChild('pager', $pager);
+            $this->getProducts()->load();
+        }
+        return $this;
+    }
+
+    /**
+     * Return the collection of Products
+     * @return array|\Magento\Catalog\Model\ResourceModel\Product\Collection
+     */
     public function getProducts(){
         $customerId = $this->customerSession->getCustomerId();
         $sellerId = $this->_helperSeller->getSellerId($customerId);
+        $products = [];
 
+        /** Get the current Pager */
+        $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
+        $pageSize = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 1;
+
+        if($sellerId != null){
+            /** Retrieve the products of the seller  */
+            $collectionSellerProducts = $this->_sellerProductFactory->create();
+            $collectionSellerProducts = $collectionSellerProducts->getCollection();
+            $collectionSellerProducts->addFieldToFilter('seller_id', $sellerId);
+            $collectionSellerProducts->addFieldToSelect("product_id");
+            $sellerProducts = [];
+            foreach ($collectionSellerProducts as $sellerProduct){
+                array_push($sellerProducts, $sellerProduct->getData("product_id"));
+            }
+            if(count($sellerProducts) > 0){
+                $collectionProducts = $this->_productCollectionFactory->create();
+                $collectionProducts->addAttributeToFilter('entity_id',
+                    array("in", $sellerProducts))->addAttributeToSelect("*");
+                $collectionProducts->setPageSize($pageSize);
+                $collectionProducts->setCurPage($page);
+                $products = $collectionProducts;
+            }
+        }
+        return $products;
+    }
+
+    /** Return the pager of the grid */
+    public function getPagerHtml()
+    {
+        return $this->getChildHtml('pager');
     }
 
 }
