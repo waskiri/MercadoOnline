@@ -21,8 +21,8 @@
         </block>
         <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-list-product">
             <arguments>
-                <argument name="path" xsi:type="string">seller/account/listproduct</argument>
-                <argument name="label" xsi:type="string">My Products</argument>
+                <argument name="path" xsi:type="string">seller/account/listproducts</argument>
+                <argument name="label" xsi:type="string">List of my Products</argument>
             </arguments>
         </block>
     </referenceBlock>

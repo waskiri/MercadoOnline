@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Ptaang\Seller\Block\Collection\ListProducts $block */
+?>
+
+<?php $products = $block->getProducts();
+?>
+<?php if(count($products)): ?>
+    <div class="table-wrapper seller-product">
+        <table class="data table table-seller-items" id="my-seller-products">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('My Products') ?></caption>
+            <thead>
+                <th scope="col" class="col name"><?php /* @escapeNotVerified */ echo __('Name') ?></th>
+                <th scope="col" class="col sku"><?php /* @escapeNotVerified */ echo __('Sku') ?></th>
+            </thead>
+            <tbody>
+                <?php foreach ($products as $product): ?>
+                    <tr>
+                        <td data-th="<?php echo $block->escapeHtml(__('Name')) ?>" class="col name">
+                            <?php /* @escapeNotVerified */ echo $product->getName() ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Sku')) ?>" class="col sku">
+                            <?php /* @escapeNotVerified */ echo $product->getSku() ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php endif; ?>
