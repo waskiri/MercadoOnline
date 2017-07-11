@@ -36,6 +36,11 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
     protected $_productCollectionFactory;
 
     /**
+     * @var \Magento\CatalogInventory\Api\StockStateInterface
+     */
+    protected $_stockState;
+
+    /**
      * Constructor
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -46,6 +51,7 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
      * @param \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory
      * @param \Ptaang\Seller\Helper\Data $helperSeller
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\CatalogInventory\Api\StockStateInterface $stockState
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -55,9 +61,12 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
         \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement,
         \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory,
         \Ptaang\Seller\Helper\Data $helperSeller,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        \Magento\CatalogInventory\Api\StockStateInterface $stockState
 
     ) {
+
+        $this->_stockState = $stockState;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_helperSeller = $helperSeller;
         $this->_sellerProductFactory = $sellerProductFactory;
@@ -117,6 +126,49 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
             }
         }
         return $products;
+    }
+
+    /**
+     * Return the Qty of the product
+     * @param \Magento\Catalog\Model\Product $product
+     * @return integer
+     */
+    public function getQty(\Magento\Catalog\Model\Product $product){
+        $qty = $this->_stockState->getStockQty($product->getId(), $product->getStore()->getWebsiteId());
+        return $qty ? $qty : 0;
+    }
+
+    /**
+     * public function get Qty Sold of the product
+     * @param int $productId
+     * @param int $sellerId
+     * @return int
+     */
+    public function getQtySold($productId, $sellerId){
+        $qtySold = 0;
+        $sellerProductEntity = $this->_sellerProductFactory->create();
+        $sellerProductEntity->loadBySellerProduct($productId, $sellerId);
+        if(!$sellerProductEntity->getId()){
+            $qtySold = $sellerProductEntity->getData("qty_sold") ? $sellerProductEntity->getData("qty_sold") : 0;
+        }
+        return $qtySold;
+    }
+
+    /**
+     * Get the sellerId, given the customer Id
+     * @return int
+     */
+    public function getSellerId(){
+        return $this->_helperSeller->getSellerId($this->customerSession->getCustomer()->getId());
+    }
+
+    /**
+     * Edit Product
+     * @param int $productId
+     * @return string $url
+     */
+    public function getEditProductUrl($productId){
+        return $this->getUrl("seller/account/newproduct/",  array("product-id"=> $productId));
     }
 
     /** Return the pager of the grid */

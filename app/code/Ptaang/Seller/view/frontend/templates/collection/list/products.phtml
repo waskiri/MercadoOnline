@@ -9,7 +9,9 @@
 /** @var \Ptaang\Seller\Block\Collection\ListProducts $block */
 ?>
 
-<?php $products = $block->getProducts();
+<?php
+$products = $block->getProducts();
+$sellerId = $block->getSellerId();
 ?>
 <?php if(count($products)): ?>
     <div class="table-wrapper seller-product">
@@ -18,6 +20,9 @@
             <thead>
                 <th scope="col" class="col name"><?php /* @escapeNotVerified */ echo __('Name') ?></th>
                 <th scope="col" class="col sku"><?php /* @escapeNotVerified */ echo __('Sku') ?></th>
+                <th scope="col" class="col qty"><?php /* @escapeNotVerified */ echo __('Qty') ?></th>
+                <th scope="col" class="col qty-sold"><?php /* @escapeNotVerified */ echo __('Qty sold') ?></th>
+                <th scope="col" class="col action"><?php /* @escapeNotVerified */ echo __('Action') ?></th>
             </thead>
             <tbody>
                 <?php foreach ($products as $product): ?>
@@ -27,6 +32,20 @@
                         </td>
                         <td data-th="<?php echo $block->escapeHtml(__('Sku')) ?>" class="col sku">
                             <?php /* @escapeNotVerified */ echo $product->getSku() ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Qty')) ?>" class="col qty">
+                            <?php /* @escapeNotVerified */ echo $block->getQty($product); ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Qty sold')) ?>" class="col qty-sold">
+                            <?php /* @escapeNotVerified */ echo $block->getQtySold($product->getId(), $sellerId) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Action')) ?>" class="col action">
+                            <a href="<?php echo $product->getProductUrl(); ?>">
+                                <?php /* @escapeNotVerified */ echo __("Show"); ?>
+                            </a> /
+                            <a href="<?php echo $block->getEditProductUrl($product->getId()); ?>">
+                                <?php /* @escapeNotVerified */ echo __("Edit"); ?>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
