@@ -44,7 +44,22 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="field field-sku required" data-bind="blockLoader: newProduct.skuLoader">
+                        <label class="label" for="sku"><?php /* @escapeNotVerified */ echo __("Sku"); ?></label>
+                        <div class="control">
+                            <input id="sku" name="sku" class="input-text required-entry" type="text"
+                                   data-bind="value: newProduct.skuValue,
+                                              valueUpdate: 'afterkeydown',
+                                              event: { change: searchSku}"
+                             />
+                        </div>
+                        <div class="message warning" data-bind="visible: newProduct.showSkuWarning" style="display: none">
+                            <span data-bind="text: newProduct.skuWarning"></span>
+                        </div>
+                    </div>
                     <?php echo $this->getChildHtml("form_attributes"); ?>
+
+
                 </fieldset>
                 <?php echo $this->getChildHtml('form_image') ?>
 

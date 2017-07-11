@@ -136,10 +136,17 @@ define([
             }
             return entries;
         },
+
         /** Generate the Url of the Product Given a Name and an SKU */
         getUrlProduct: function(name, sku){
             var nameProduct = name.trim(), skuProduct = sku.trim();
             return nameProduct.toLowerCase()+"-"+skuProduct.toLowerCase();
+        },
+
+        /** Search Sku of the product*/
+        searchSku: function(){
+            //newProduct.skuLoader(true);
+            console.log(newProduct.skuValue());
         }
     });
 });
