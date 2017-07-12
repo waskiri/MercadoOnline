@@ -9,9 +9,10 @@ define([
     'mage/translate',
     'Ptaang_Seller/js/model/new-product',
     'Ptaang_Seller/js/action/change-attribute-set',
-    'Ptaang_Seller/js/action/create-product'
+    'Ptaang_Seller/js/action/create-product',
+    'Ptaang_Seller/js/action/search-sku'
 
-], function (ko,Component, $ , $t, newProduct, changeAttributeSet, createProduct) {
+], function (ko,Component, $ , $t, newProduct, changeAttributeSet, createProduct, searchSku) {
     'use strict';
 
     return Component.extend({
@@ -145,8 +146,8 @@ define([
 
         /** Search Sku of the product*/
         searchSku: function(){
-            //newProduct.skuLoader(true);
-            console.log(newProduct.skuValue());
+            newProduct.skuLoader(true);
+            searchSku(newProduct.skuValue());
         }
     });
 });
