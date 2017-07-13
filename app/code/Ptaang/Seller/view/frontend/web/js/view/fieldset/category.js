@@ -14,12 +14,11 @@ define([
 
         newProduct: newProduct,
         addCategory: function(categoryId){
-            var categoryString = newProduct.categorySelected();
-            var categoryArray  = categoryString.length ===0 ? [] : categoryString.split(",");
+            var categoryArray  = newProduct.categoryArraySelected();
             var i = categoryArray.indexOf(categoryId);
             /** Check the value of checkbox and save in the input */
             if( i != -1) {
-                categoryArray.splice(i , 1);
+                categoryArray.splice(i, 1);
             }else{
                 categoryArray.push(categoryId);
             }

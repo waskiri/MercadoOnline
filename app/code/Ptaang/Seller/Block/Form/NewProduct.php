@@ -47,6 +47,11 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
     protected $_collectionAttributeFactory;
 
     /**
+     * @var  \Magento\Catalog\Model\ProductFactory
+     */
+    protected $_productFactory;
+
+    /**
      * @var \Ptaang\Seller\Helper\Data
      */
     protected $_helperSeller;
@@ -62,6 +67,7 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
      * @param \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory
+     * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Ptaang\Seller\Helper\Data $helperSeller
      * @param array $layoutProcessors
      * @param array $data
@@ -74,11 +80,12 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
         \Magento\Customer\Api\AccountManagementInterface $customerAccountManagement,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory,
+        \Magento\Catalog\Model\ProductFactory $productFactory,
         \Ptaang\Seller\Helper\Data $helperSeller,
         array $layoutProcessors = [],
         array $data = []
     ) {
-
+        $this->_productFactory = $productFactory;
         $this->_helperSeller = $helperSeller;
         $this->_attributeSetFactory = $attributeSetFactory;
         $this->_storeManager = $context->getStoreManager();
@@ -105,6 +112,17 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
             /** Attributes Set Id */
             $attributeSetIds = $this->getAttributeSetIdArray();
             $this->jsLayout["components"]["sellernewproduct"]["productTypes"] = $attributeSetIds;
+
+            /** Populate the fields if is editing the product */
+            if($this->isEditingTheProduct()){
+                $product = $this->getProduct();
+                $categoryIds = $product->getCategoryIds();
+                if(count($categoryIds) > 0){
+                    $this->jsLayout["components"]["sellernewproduct"]["categorySelected"] = implode("," , $categoryIds);
+                    $this->jsLayout["components"]["sellernewproduct"]["categoryArraySelected"] = $categoryIds;
+}
+
+            }
         }
         return \Zend_Json::encode($this->jsLayout);
     }
@@ -163,5 +181,31 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
             array_push($categoryOption, array("name" => $category->getName(), "id" => $category->getId()));
         }
         return $categoryOption;
+    }
+
+    /**
+     * Check if is editing the product or creating a new one
+     * @return boolean
+     */
+    public function isEditingTheProduct(){
+        $editingProduct = false;
+        $productId = $this->getRequest()->getParam("product-id");
+        if($productId !== null){
+            $editingProduct = true;
+        }
+        return $editingProduct;
+    }
+
+    /**
+     * Get Product
+     * @return \Magento\Catalog\Model\Product | null
+     */
+    public function getProduct(){
+        $product = null;
+        $productId = $this->getRequest()->getParam("product-id");
+        if($productId !== null){
+            $product = $this->_productFactory->create()->load($productId);
+        }
+        return $product;
     }
 }

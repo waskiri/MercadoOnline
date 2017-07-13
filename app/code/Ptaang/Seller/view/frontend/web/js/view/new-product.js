@@ -18,7 +18,9 @@ define([
     return Component.extend({
         defaults: {
             categoryList: [],
-            productTypes: []
+            productTypes: [],
+            categorySelected: "",
+            categoryArraySelected: []
         },
         newProduct: newProduct,
 
@@ -27,6 +29,8 @@ define([
             this._super().observe([]);
             /** populate category List */
             this.newProduct.categoryList(this.categoryList);
+            this.newProduct.categorySelected(this.categorySelected);
+            this.newProduct.categoryArraySelected(this.categoryArraySelected);
 
             /** populate the product Type Select */
             var ProductType = function(attribute_set_id, attribute_set_name) {

@@ -20,17 +20,19 @@
                     <legend class="legend">
                         <?php /* @escapeNotVerified */ echo __("Product information"); ?>
                     </legend>
-                    <div class="field field-type required">
-                        <label class="label" for="type"><?php /* @escapeNotVerified */ echo __("Choose the type of Product"); ?></label>
-                        <div class="control">
-                            <select id="type" class="required-entry" name="attribute_set_id" data-bind="options: newProduct.productTypes,
-                                                                                optionsText: 'name',
-                                                                                optionsValue: 'id',
-                                                                                optionsCaption: $t('Choose your type Product...'),
-                                                                                value: newProduct.selectedProductType,
-                                                                                event:{ change: selectProductType}"></select>
+                    <?php if(!$block->isEditingTheProduct()):?>
+                        <div class="field field-type required">
+                            <label class="label" for="type"><?php /* @escapeNotVerified */ echo __("Choose the type of Product"); ?></label>
+                            <div class="control">
+                                <select id="type" class="required-entry" name="attribute_set_id" data-bind="options: newProduct.productTypes,
+                                                                                    optionsText: 'name',
+                                                                                    optionsValue: 'id',
+                                                                                    optionsCaption: $t('Choose your type Product...'),
+                                                                                    value: newProduct.selectedProductType,
+                                                                                    event:{ change: selectProductType}"></select>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                     <div class="field field-category required">
                         <label class="label" for="category"><?php /* @escapeNotVerified */ echo __("Categories"); ?></label>
                         <div class="control">
@@ -51,6 +53,9 @@
                                    data-bind="value: newProduct.skuValue,
                                               valueUpdate: 'afterkeydown',
                                               event: { change: searchSku}"
+                                   <?php if($block->isEditingTheProduct()): ?>
+                                       readonly="readonly"
+                                   <?php endif; ?>
                              />
                         </div>
                         <div class="message warning" data-bind="visible: newProduct.showSkuWarning" style="display: none">

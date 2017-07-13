@@ -19,6 +19,7 @@ define([
         /** Category Field */
         categoryList: ko.observableArray([]),
         categorySelected: ko.observable(""),
+        categoryArraySelected: ko.observableArray([]),
         showCategoryList: ko.observable(false),
 
         /** Images */
