@@ -23,11 +23,11 @@ class Changefieldset extends \Magento\Framework\App\Action\Action {
      */
     protected $_helper;
 
-    /**
-     * @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory
-     */
-    protected $_collectionAttributeFactory;
 
+    /**
+     * @var \Ptaang\Seller\Helper\Data
+     */
+    protected $_helperSeller;
 
     /**
      * ChangeFieldset constructor.
@@ -44,9 +44,9 @@ class Changefieldset extends \Magento\Framework\App\Action\Action {
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
         \Magento\Framework\Json\Helper\Data $helper,
-        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory){
+        \Ptaang\Seller\Helper\Data $helperSeller){
 
-        $this->_collectionAttributeFactory = $collectionAttributeFactory;
+        $this->_helperSeller    = $helperSeller;
         $this->_resultJsonFactory = $resultJsonFactory;
         $this->_resultRawFactory  = $resultRawFactory;
         $this->_helper            = $helper;
@@ -79,45 +79,12 @@ class Changefieldset extends \Magento\Framework\App\Action\Action {
         /** Get the additional attributes of the attribute set */
         if($attributeSetId > 0){
             $response["error"] = false;
-            $response["attributes"] = $this->getAttributesGivenAttributeSetId($attributeSetId);
+            $response["attributes"] = $this->_helperSeller->getAttributesGivenAttributeSetId($attributeSetId);
         }
 
         $result = $this->_resultJsonFactory->create();
         return $result->setData($response);
     }
 
-    /**
-     * Get attributes of and attribute set id, but returns the attributes not included in the deafult
-     * @param int $attributeSetId
-     * @return array
-     */
-    public function getAttributesGivenAttributeSetId($attributeSetId){
 
-        /** Load the default attributes  */
-        $attributesDefault = [];
-        $nodeChildren = $this->_collectionAttributeFactory->create()->setAttributeSetFilter(
-            \Ptaang\Seller\Constant\Product::ATTRIBUTE_SET_ID
-        )->addVisibleFilter()->load();
-        foreach ($nodeChildren->getItems() as $child) {
-            $attributeData = $child->getData();
-            array_push($attributesDefault, $attributeData["attribute_code"]);
-        }
-
-        /** Load the different attributes of default */
-        $attributes = [];
-        $nodeChildren = $this->_collectionAttributeFactory->create()->setAttributeSetFilter(
-            $attributeSetId
-        )->addVisibleFilter()->load();
-        foreach ($nodeChildren->getItems() as $child) {
-            $attributeData = $child->getData();
-            $attributeCode = $attributeData["attribute_code"];
-            if(!in_array($attributeCode, $attributesDefault)){
-                if($attributeData['frontend_input'] == "select"){
-                    $attributeData["options"] = $child->getSource()->getAllOptions();
-                }
-                array_push($attributes, $attributeData);
-            }
-        }
-        return $attributes;
-    }
 }

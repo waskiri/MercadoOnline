@@ -15,13 +15,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
      * @var \Ptaang\Seller\Model\Seller
      */
     protected $seller;
+
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory
+     */
+    protected $_collectionAttributeFactory;
+
+
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
-        \Ptaang\Seller\Model\SellerFactory $sellerFactory){
-
+        \Ptaang\Seller\Model\SellerFactory $sellerFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory){
+        $this->_collectionAttributeFactory = $collectionAttributeFactory;
         $this->seller = $sellerFactory;
         parent::__construct($context);
     }
@@ -50,5 +59,40 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
             $sellerId = $seller->getId();
         }
         return $sellerId;
+    }
+
+    /**
+     * Get attributes of and attribute set id, but returns the attributes not included in the deafult
+     * @param int $attributeSetId
+     * @return array
+     */
+    public function getAttributesGivenAttributeSetId($attributeSetId){
+
+        /** Load the default attributes  */
+        $attributesDefault = [];
+        $nodeChildren = $this->_collectionAttributeFactory->create()->setAttributeSetFilter(
+            \Ptaang\Seller\Constant\Product::ATTRIBUTE_SET_ID
+        )->addVisibleFilter()->load();
+        foreach ($nodeChildren->getItems() as $child) {
+            $attributeData = $child->getData();
+            array_push($attributesDefault, $attributeData["attribute_code"]);
+        }
+
+        /** Load the different attributes of default */
+        $attributes = [];
+        $nodeChildren = $this->_collectionAttributeFactory->create()->setAttributeSetFilter(
+            $attributeSetId
+        )->addVisibleFilter()->load();
+        foreach ($nodeChildren->getItems() as $child) {
+            $attributeData = $child->getData();
+            $attributeCode = $attributeData["attribute_code"];
+            if(!in_array($attributeCode, $attributesDefault)){
+                if($attributeData['frontend_input'] == "select"){
+                    $attributeData["options"] = $child->getSource()->getAllOptions();
+                }
+                array_push($attributes, $attributeData);
+            }
+        }
+        return $attributes;
     }
 }

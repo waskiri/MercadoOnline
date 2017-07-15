@@ -47,6 +47,11 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
     protected $_collectionAttributeFactory;
 
     /**
+     * @var \Magento\CatalogInventory\Api\StockStateInterface
+     */
+    protected $_stockState;
+
+    /**
      * @var  \Magento\Catalog\Model\ProductFactory
      */
     protected $_productFactory;
@@ -68,6 +73,7 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
+     * @param \Magento\CatalogInventory\Api\StockStateInterface $stockState
      * @param \Ptaang\Seller\Helper\Data $helperSeller
      * @param array $layoutProcessors
      * @param array $data
@@ -81,10 +87,12 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory,
         \Magento\Catalog\Model\ProductFactory $productFactory,
+        \Magento\CatalogInventory\Api\StockStateInterface $stockState,
         \Ptaang\Seller\Helper\Data $helperSeller,
         array $layoutProcessors = [],
         array $data = []
     ) {
+        $this->_stockState = $stockState;
         $this->_productFactory = $productFactory;
         $this->_helperSeller = $helperSeller;
         $this->_attributeSetFactory = $attributeSetFactory;
@@ -120,7 +128,7 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
                 if(count($categoryIds) > 0){
                     $this->jsLayout["components"]["sellernewproduct"]["categorySelected"] = implode("," , $categoryIds);
                     $this->jsLayout["components"]["sellernewproduct"]["categoryArraySelected"] = $categoryIds;
-}
+                }
 
             }
         }
@@ -159,10 +167,8 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
         $collectionAttributeSet = $this->_attributeSetFactory->create()->getCollection();
         $collectionAttributeSet->addFieldToFilter("entity_type_id", \Ptaang\Seller\Constant\Product::ATTRIBUTE_SET_ID);
         foreach ($collectionAttributeSet as $attributeSet){
-            if($attributeSet->getAttributeSetName() != "Default"){
-                $attributeSetId[] = ["attribute_set_id" => $attributeSet->getAttributeSetId(),
-                                        "attribute_set_name" =>$attributeSet->getAttributeSetName()];
-            }
+            $attributeSetId[] = ["attribute_set_id" => $attributeSet->getAttributeSetId(),
+                "attribute_set_name" =>$attributeSet->getAttributeSetName()];
         }
         return $attributeSetId;
     }
@@ -208,4 +214,15 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
         }
         return $product;
     }
+
+    /**
+     * Get stock Qty
+     * @param int $productId
+     * @return int
+     */
+    public function getStockProduct($productId){
+        return $this->_stockState->getStockQty($productId);
+    }
+
+
 }

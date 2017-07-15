@@ -7,6 +7,10 @@
 // @codingStandardsIgnoreFile
 
 /** @var \Ptaang\Seller\Block\Form\NewProduct $block */
+$product =  null;
+if($block->isEditingTheProduct()){
+    $product = $block->getProduct();
+}
 ?>
 <div id="new-product-form" class="new-product-form" data-bind="scope:'sellernewproduct'">
     <div class="block-manage-products add-new-products">
@@ -50,11 +54,13 @@
                         <label class="label" for="sku"><?php /* @escapeNotVerified */ echo __("Sku"); ?></label>
                         <div class="control">
                             <input id="sku" name="sku" class="input-text required-entry" type="text"
-                                   data-bind="value: newProduct.skuValue,
+                                   <?php if($block->isEditingTheProduct() && $product !== null): ?>
+                                       readonly="readonly"
+                                       value="<?php echo $product->getSku(); ?>"
+                                   <?php else: ?>
+                                       data-bind="value: newProduct.skuValue,
                                               valueUpdate: 'afterkeydown',
                                               event: { change: searchSku}"
-                                   <?php if($block->isEditingTheProduct()): ?>
-                                       readonly="readonly"
                                    <?php endif; ?>
                              />
                         </div>
@@ -62,7 +68,63 @@
                             <span data-bind="text: newProduct.skuWarning"></span>
                         </div>
                     </div>
-                    <?php echo $this->getChildHtml("form_attributes"); ?>
+                    <div class="field field-name required">
+                        <label class="label" for="name"><?php /* @escapeNotVerified */ echo __("Name"); ?></label>
+                        <div class="control">
+                            <input id="name" name="name" class="input-text required-entry" type="text"
+                                   value="<?php echo ($block->isEditingTheProduct() && $product !== null)?  $product->getName(): ""; ?> ">
+                        </div>
+                    </div>
+
+                    <div class="field field-price required">
+                        <label class="label" for="price"><?php /* @escapeNotVerified */ echo __("Price"); ?></label>
+                        <div class="control">
+                            <input id="price" name="price" class="input-text required-entry" type="text"
+                                   data-validate="{required:true, 'validate-price':true}"
+                                   value="<?php echo ($block->isEditingTheProduct() && $product !== null)?
+                                       number_format($product->getPriceInfo()->getPrice('final_price')->getValue(), 2) : 0.00; ?> "
+                            />
+                            <span class="note"><?php echo __("Add a price with 2 decimals for example: 12.00 or 12.50"); ?></span>
+                        </div>
+                    </div>
+
+                    <div class="field field-status required">
+                        <label class="label" for="status"><?php /* @escapeNotVerified */ echo __("Status"); ?></label>
+                        <div class="control">
+                            <select id="status" name="status" class="required-entry">
+                                <option value="0"><?php /* @escapeNotVerified */ echo __("Disabled"); ?></option>
+                                <option value="1"><?php /* @escapeNotVerified */ echo __("Enabled"); ?></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field field-qty required">
+                        <label class="label" for="qty"><?php /* @escapeNotVerified */ echo __("Quantity"); ?></label>
+                        <div class="control">
+                            <input id="qty" name="extension_attributes[qty]" class="input-text required-entry" type="text" data-validate="{'validate-number':true}"
+                                   value="<?php echo ($block->isEditingTheProduct() && $product !== null)?  $block->getStockProduct($product->getId()) : 100; ?>" />
+
+                        </div>
+                    </div>
+
+                    <div class="field field-description required">
+                        <label class="label" for="description"><?php /* @escapeNotVerified */ echo __("Description"); ?></label>
+                        <div class="control">
+                            <textarea id="description" name="custom_attributes[description]" class="textarea required-entry"  >
+                                <?php echo ($block->isEditingTheProduct() && $product !== null)?  $product->getDescription(): ""; ?>
+                            </textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="field field-short_description">
+                        <label class="label" for="short_description"><?php /* @escapeNotVerified */ echo __("Short Description"); ?></label>
+                        <div class="control">
+                            <textarea id="short_description" name="custom_attributes[short_description]" class="textarea"  >
+                                <?php echo ($block->isEditingTheProduct() && $product !== null)?  $product->getShortDescription(): ""; ?>
+                            </textarea>
+                        </div>
+                    </div>
 
 
                 </fieldset>
@@ -70,7 +132,7 @@
 
                 <fieldset class="fieldset extra-info" data-bind="foreach: { data: newProduct.attributes, as: 'attribute' }">
                     <legend class="legend">
-                        <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
+                        <?php /* @escapeNotVerified */ echo $block->isEditingTheProduct()? __("Edit Product") : __("Product extra information"); ?>
                     </legend>
                     <!-- ko if: (attribute.frontend_input == 'select') -->
                         <!-- ko foreach: $parent.getRegion('attributeSelect') -->

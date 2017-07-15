@@ -23,7 +23,6 @@
             <block class="Ptaang\Seller\Block\Form\NewProduct" name="seller_products" template="Ptaang_Seller::form/newproduct.phtml" cacheable="false">
                 <container name="form.additional.info" as="form_additional_info" />
                 <block class="Ptaang\Seller\Block\Form\Fieldset\Image" name="form_image" template="Ptaang_Seller::form/fieldset/image.phtml"  />
-                <block class="Magento\Framework\View\Element\Template" name="form_attributes" template="Ptaang_Seller::form/fieldset/default-attributes.phtml" />
                 <arguments>
                     <argument name="jsLayout" xsi:type="array">
                         <item name="components" xsi:type="array">
