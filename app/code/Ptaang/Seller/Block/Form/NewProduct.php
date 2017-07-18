@@ -129,6 +129,8 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
                     $this->jsLayout["components"]["sellernewproduct"]["categorySelected"] = implode("," , $categoryIds);
                     $this->jsLayout["components"]["sellernewproduct"]["categoryArraySelected"] = $categoryIds;
                 }
+                $this->jsLayout["components"]["sellernewproduct"]["imagesFile"] = $this->getGalleryProduct($product);
+
 
             }
         }
@@ -225,4 +227,35 @@ class NewProduct extends \Magento\Customer\Block\Account\Dashboard
     }
 
 
+    /**
+     * Get Custom Attributes given an attribute Set id
+     * @param int $productSetId
+     * @return array
+     */
+    public function getCustomAttributes($productSetId){
+        return $this->_helperSeller->getAttributesGivenAttributeSetId($productSetId);
+    }
+
+
+    /**
+     * Get Gallery given a product
+     * @param \Magento\Catalog\Model\Product $product
+     * @return array
+     */
+     public function getGalleryProduct($product){
+         $galleryImages = [];
+         $mediaUrl =$this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product';
+         $galleryCollection = $product->getMediaGalleryEntries();
+         foreach ($galleryCollection as $galleryEntry){
+             $galleryName = explode("/", $galleryEntry->getFile());
+             $galleryName = $galleryName[count($galleryName) - 1];
+             $galleryImages[] = array (
+                 "path" => $galleryEntry->getFile(),
+                 "src"  => $mediaUrl.$galleryEntry->getFile(),
+                 "entry_id" => $galleryEntry->getId(),
+                 "name" => $galleryName
+             );
+         }
+         return $galleryImages;
+     }
 }

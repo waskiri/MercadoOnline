@@ -130,16 +130,49 @@ if($block->isEditingTheProduct()){
                 </fieldset>
                 <?php echo $this->getChildHtml('form_image') ?>
 
-                <fieldset class="fieldset extra-info" data-bind="foreach: { data: newProduct.attributes, as: 'attribute' }">
-                    <legend class="legend">
-                        <?php /* @escapeNotVerified */ echo $block->isEditingTheProduct()? __("Edit Product") : __("Product extra information"); ?>
-                    </legend>
-                    <!-- ko if: (attribute.frontend_input == 'select') -->
-                        <!-- ko foreach: $parent.getRegion('attributeSelect') -->
-                             <!-- ko template: {name: getTemplate(), data: attribute } --><!-- /ko -->
-                         <!-- /ko -->
-                    <!-- /ko -->
-                </fieldset>
+                <?php if($block->isEditingTheProduct() && $product !== null): ?>
+                    <?php $customAttributes = $block->getCustomAttributes($product->getAttributeSetId()); ?>
+                    <?php if(count($customAttributes) > 0 ): ?>
+                        <fieldset class="fieldset extra-info">
+                            <legend class="legend">
+                                <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
+                            </legend>
+                            <?php foreach ($customAttributes as $customAttribute): ?>
+                                <?php if($customAttribute["frontend_input"] == "select"): ?>
+                                    <div class="field required field-<?php echo $customAttribute["attribute_code"]?>">
+                                        <label class="label" for="<?php echo $customAttribute["attribute_code"]; ?>" >
+                                            <?php echo $customAttribute["frontend_label"]; ?>
+                                        </label>
+                                        <?php $attributeValue = $product->getCustomAttribute($customAttribute["attribute_code"])->getValue(); ?>
+                                        <div class="control">
+                                            <select name="'custom_attributes[<?php echo $customAttribute["attribute_code"]; ?>]">
+                                                    id="<?php echo $customAttribute["attribute_code"]; ?>"
+                                                    class="<?php echo $customAttribute["is_required"]? "required-entry" : ""; ?>"
+                                                    <?php foreach ($customAttribute["options"] as $option): ?>
+                                                        <option value="<?php echo $option["value"]; ?>" <?php echo $attributeValue == $option["value"]?"selected":""; ?>>
+                                                            <?php echo $option["label"]; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </fieldset>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <fieldset class="fieldset extra-info" data-bind="foreach: { data: newProduct.attributes, as: 'attribute' }">
+                        <legend class="legend">
+                            <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
+                        </legend>
+                        <!-- ko if: (attribute.frontend_input == 'select') -->
+                            <!-- ko foreach: $parent.getRegion('attributeSelect') -->
+                                <!-- ko template: {name: getTemplate(), data: attribute } --><!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </fieldset>
+                <?php endif; ?>
+
 
                 <div class="actions-toolbar">
                     <div class="primary">
@@ -161,7 +194,8 @@ if($block->isEditingTheProduct()){
     <script>
         storeCode = '<?php /* @escapeNotVerified */ echo $block->getCurrentWebsiteCode(); ?>';
         token = '<?php /* @escapeNotVerified */ echo $block->getToken(); ?>';
-        sellerId = '<?php /* @escapeNotVerified */ echo $block->getSellerId(); ?>';
+        sellerId  = '<?php /* @escapeNotVerified */ echo $block->getSellerId(); ?>';
+        sku = '<?php /* @escapeNotVerified */ echo $block->getProduct() != null?$block->getProduct()->getSku(): null; ?>'
     </script>
 
 </div>

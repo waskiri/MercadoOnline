@@ -16,12 +16,12 @@
             <input type="file" multiple data-bind="event:{change: fileSelect}" accept="image/*">
         </div>
     </div>
-    <div>
-    <ul data-bind="foreach: { data: newProduct.imagesFile, as: 'imagesFile' }" class="image-gallery">
-       <!-- ko foreach: $parent.getRegion('imageItem') -->
-                <!-- ko template: {name: getTemplate(), data: imagesFile} --><!-- /ko -->
-       <!-- /ko -->
-    </ul>
+    <div class="images" data-bind="blockLoader: newProduct.loaderImages">
+        <ul data-bind="foreach: { data: newProduct.imagesFile, as: 'imagesFile' }" class="image-gallery">
+           <!-- ko foreach: $parent.getRegion('imageItem') -->
+                    <!-- ko template: {name: getTemplate(), data: imagesFile} --><!-- /ko -->
+           <!-- /ko -->
+        </ul>
     </div>
     <script type="text/x-magento-init">
            {

@@ -24,6 +24,7 @@ define([
 
         /** Images */
         imagesFile: ko.observableArray([]),
+        loaderImages: ko.observable(false),
 
         /** Product type Select */
         productTypes: ko.observableArray([]),

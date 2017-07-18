@@ -82,7 +82,10 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
                 url: urlBuilder.build(url),
                 type: 'DELETE',
                 global: global,
-                contentType: contentType
+                contentType: contentType,
+                beforeSend : function( xhr ) {
+                    xhr.setRequestHeader( "Authorization", "BEARER " + token );
+                }
             });
         }
     };

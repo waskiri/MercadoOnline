@@ -20,7 +20,8 @@ define([
             categoryList: [],
             productTypes: [],
             categorySelected: "",
-            categoryArraySelected: []
+            categoryArraySelected: [],
+            imagesFile: []
         },
         newProduct: newProduct,
 
@@ -31,6 +32,9 @@ define([
             this.newProduct.categoryList(this.categoryList);
             this.newProduct.categorySelected(this.categorySelected);
             this.newProduct.categoryArraySelected(this.categoryArraySelected);
+
+            /** populate the product gallery */
+            this.newProduct.imagesFile(this.imagesFile);
 
             /** populate the product Type Select */
             var ProductType = function(attribute_set_id, attribute_set_name) {

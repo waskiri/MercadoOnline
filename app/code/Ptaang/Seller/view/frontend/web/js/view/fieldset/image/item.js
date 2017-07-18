@@ -5,9 +5,10 @@
 define([
     'ko',
     'uiComponent',
-    'Ptaang_Seller/js/model/new-product'
+    'Ptaang_Seller/js/model/new-product',
+    'Ptaang_Seller/js/action/delete-image'
 
-], function (ko, Component, newProduct) {
+], function (ko, Component, newProduct, deleteImage) {
     'use strict';
 
     ko.observableArray.fn.swap = function(index1, index2) {
@@ -22,7 +23,12 @@ define([
 
         newProduct: newProduct,
         removeImage: function (imageFile) {
-            newProduct.imagesFile.remove(imageFile);
+            if(imageFile.entry_id != 0){ // remove an existing image
+                newProduct.loaderImages(true);
+                deleteImage(imageFile.entry_id, imageFile);
+            }else{
+                newProduct.imagesFile.remove(imageFile);
+            }
         },
         /** Up the position of Image */
         upImage: function(imageFile){
@@ -33,7 +39,8 @@ define([
         },
         /** Down the position of Image */
         downImage: function(imageFile){
-            var i = newProduct.imagesFile.indexOf(imageFile), lastItemIndex = newProduct.imagesFile().length - 1;
+            var i = newProduct.imagesFile.indexOf(imageFile),
+                lastItemIndex = newProduct.imagesFile().length - 1;
             if(i > 0 && i != lastItemIndex){
                 newProduct.imagesFile.swap(i, i+1);
             }
