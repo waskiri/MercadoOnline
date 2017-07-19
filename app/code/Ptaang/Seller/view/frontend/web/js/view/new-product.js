@@ -92,24 +92,19 @@ define([
                         attribute_code: attributeCode.replace(expReplaceCustom, ""), value: entry.value
                     });
                 }else if(expExtensionAttr.exec(attributeCode)) {
+
                     if(attributeCode.replace(expReplaceExt, "") == "qty"){
-                        if(productId == 0){
-                            extensionAttributes = {
-                                stockItem : {
-                                    qty: entry.value,
-                                    isInStock: true
-                                }
+                        extensionAttributes = {
+                            stockItem : {
+                                qty: entry.value,
+                                isInStock: true
                             }
-                        }else{ //Updating the product
-                            extensionAttributes = {
-                                stockItem : {
-                                    productId: productId,
-                                    qty: entry.value,
-                                    isInStock: true
-                                }
-                            }
+                        };
+                        if(productId != 0){
+                            extensionAttributes.stockItem.productId = productId;
                         }
                     }
+
                 }else{
                     if(attributeCode == "category_ids"){
                         createProductData[attributeCode] = (entry.value).split(",");
@@ -120,8 +115,7 @@ define([
                 }
             });
             /** Generate the URL of the Product, because I got an error when send empty */
-            if(createProductData.hasOwnProperty("sku") &&
-                        createProductData.hasOwnProperty("name")){
+            if(createProductData.hasOwnProperty("sku") && createProductData.hasOwnProperty("name")){
                 var url = this.getUrlProduct(createProductData["sku"], createProductData["name"]);
                 customAttributesArray.push({
                     attribute_code: "url_key", value: url
@@ -140,33 +134,22 @@ define([
             var images = newProduct.imagesFile(), entries = [];
             for(var i in images){
                 var image = images[i], imageType = image.type;
+                entries[i] = {
+                    position: i,
+                    media_type: 'image',
+                    disabled: false,
+                    types: i == 1 ? ['image','small_image','thumbnail'] : [],
+                    content: {
+                        type: imageType,
+                        name: image.name
+                    }
+                };
                 if(image.entry_id == 0){
-                    entries[i] = {
-                        position: i,
-                        media_type: 'image',
-                        disabled: false,
-                        types: i == 1 ? ['image','small_image','thumbnail'] : [],
-                        content: {
-                            type: imageType,
-                            name: image.name,
-                            base64_encoded_data: image.src.replace("data:"+ imageType+";base64,","")
-                        }
-                    }
+                    entries[i].content.base64_encoded_data = image.src.replace("data:"+ imageType+";base64,","")
                 }else{
-                    entries[i] = {
-                        id: image.entry_id,
-                        position: i,
-                        media_type: 'image',
-                        disabled: false,
-                        types: i == 1 ? ['image','small_image','thumbnail'] : [],
-                        file:  image.path,
-                        content: {
-                            type: imageType,
-                            name: image.name
-                        }
-                    }
+                    entries[i].id = image.entry_id;
+                    entries[i].file = image.path;
                 }
-
             }
             return entries;
         },
@@ -181,6 +164,15 @@ define([
         searchSku: function(){
             newProduct.skuLoader(true);
             searchSku(newProduct.skuValue());
-        }
+        },
+
+        /** Add message css class */
+        messageType: ko.computed(function(){
+            var classVariable = "success";
+            if(newProduct.messageError()){
+                classVariable = "error";
+            }
+            return classVariable;
+        })
     });
 });

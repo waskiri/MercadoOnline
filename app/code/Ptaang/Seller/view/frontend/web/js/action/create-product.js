@@ -7,9 +7,10 @@ define(
     [
         'Ptaang_Seller/js/lib/storage',
         'Ptaang_Seller/js/model/url-builder',
-        'Ptaang_Seller/js/model/new-product'
+        'Ptaang_Seller/js/model/new-product',
+        'mage/translate'
     ],
-    function (storage, urlBuilder, newProduct) {
+    function (storage, urlBuilder, newProduct, $t) {
         'use strict';
 
         return function (createProductForm, customAttributes, extensionAttributes, gallery) {
@@ -21,12 +22,23 @@ define(
             if(gallery.length > 0){
                 productObject.product.media_gallery_entries = gallery;
             }
+
+            var messageSuccess = function(){
+                newProduct.messageError(false);
+                newProduct.messageText($t("Create the product successfully"));
+            };
+            var messageError = function(){
+                newProduct.messageError(true);
+                newProduct.messageText($t("Error creating or updating the product"));
+            };
+
             return storage.put(
                         urlBuilder.createUrl('/products/'+createProductForm.sku, {}),
                         JSON.stringify(productObject),
                         false
                     ).done(
                         function (response) {
+                            newProduct.messagesVisible(true);
                             /** if have property Id the product has been Created successfully */
                             if(response.hasOwnProperty("id")){
                                 var idProduct = response.id, sellerId = urlBuilder.getSellerId();
@@ -40,24 +52,28 @@ define(
                                     false
                                 ).done(
                                     function (response) {
-                                        console.log(response);
+                                        messageSuccess();
                                         newProduct.formLoader(false);
                                     }
                                 ).fail(
                                     function () {
+                                        messageError();
                                         newProduct.formLoader(false);
                                     }
                                 );
                             /** End call to the second controller */
                             }else{
+                                messageError();
                                 newProduct.formLoader(false);
                             }
                         }
                     ).fail(
                         function () {
+                            messageError();
                             newProduct.formLoader(false);
                         }
                     );
+
         };
     }
 );

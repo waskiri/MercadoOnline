@@ -13,6 +13,9 @@ if($block->isEditingTheProduct()){
 }
 ?>
 <div id="new-product-form" class="new-product-form" data-bind="scope:'sellernewproduct'">
+    <div class="message" data-bind="css: messageType, visible: newProduct.messagesVisible">
+        <span data-bind="text: newProduct.messageText"></span>
+    </div>
     <div class="block-manage-products add-new-products">
         <div class="form-block">
             <form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/productPost') ?>"
