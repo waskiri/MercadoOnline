@@ -8,6 +8,12 @@ define([
         'ko'
 ], function ($, $t,ko) {
     return {
+        /** Messages */
+        messagesVisible: ko.observable(false),
+        messageError: ko.observable(false),
+        messageText: ko.observable(""),
+
+        /** Loaders  */
         formLoader: ko.observable(false),
         skuLoader: ko.observable(false),
 

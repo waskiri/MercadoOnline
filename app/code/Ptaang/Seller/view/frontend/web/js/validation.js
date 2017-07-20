@@ -695,7 +695,7 @@
                 }
                 return true;
             },
-            'Please enter a valid number in this field. 2'
+            'Please enter a valid number in this field. '
         ],
         "required-number": [
             function (v) {

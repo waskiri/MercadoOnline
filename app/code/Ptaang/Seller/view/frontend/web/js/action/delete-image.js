@@ -13,7 +13,6 @@ define(
         'use strict';
         sku: sku;
         return function (itemId, imageFile) {
-            console.log(sku);
             return storage.delete(
                         urlBuilder.createUrl('/products/'+sku+'/media/'+itemId, {}),
                         JSON.stringify({

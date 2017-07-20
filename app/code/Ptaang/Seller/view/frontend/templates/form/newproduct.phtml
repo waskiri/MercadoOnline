@@ -13,6 +13,9 @@ if($block->isEditingTheProduct()){
 }
 ?>
 <div id="new-product-form" class="new-product-form" data-bind="scope:'sellernewproduct'">
+    <div class="message" data-bind="css: messageType, visible: newProduct.messagesVisible">
+        <span data-bind="text: newProduct.messageText"></span>
+    </div>
     <div class="block-manage-products add-new-products">
         <div class="form-block">
             <form class="form form-edit-account" action="<?php /* @escapeNotVerified */ echo $block->getUrl('seller/account/productPost') ?>"
@@ -72,7 +75,7 @@ if($block->isEditingTheProduct()){
                         <label class="label" for="name"><?php /* @escapeNotVerified */ echo __("Name"); ?></label>
                         <div class="control">
                             <input id="name" name="name" class="input-text required-entry" type="text"
-                                   value="<?php echo ($block->isEditingTheProduct() && $product !== null)?  $product->getName(): ""; ?> ">
+                                   value="<?php echo ($block->isEditingTheProduct() && $product !== null)?  $product->getName(): ""; ?>">
                         </div>
                     </div>
 
@@ -82,7 +85,7 @@ if($block->isEditingTheProduct()){
                             <input id="price" name="price" class="input-text required-entry" type="text"
                                    data-validate="{required:true, 'validate-price':true}"
                                    value="<?php echo ($block->isEditingTheProduct() && $product !== null)?
-                                       number_format($product->getPriceInfo()->getPrice('final_price')->getValue(), 2) : 0.00; ?> "
+                                       number_format($product->getPriceInfo()->getPrice('final_price')->getValue(), 2) : 0.00; ?>"
                             />
                             <span class="note"><?php echo __("Add a price with 2 decimals for example: 12.00 or 12.50"); ?></span>
                         </div>
@@ -91,9 +94,10 @@ if($block->isEditingTheProduct()){
                     <div class="field field-status required">
                         <label class="label" for="status"><?php /* @escapeNotVerified */ echo __("Status"); ?></label>
                         <div class="control">
+                            <?php $stockStatus = ($block->isEditingTheProduct() && $product !== null) ? $product->getStatus(): 0; ?>
                             <select id="status" name="status" class="required-entry">
-                                <option value="0"><?php /* @escapeNotVerified */ echo __("Disabled"); ?></option>
-                                <option value="1"><?php /* @escapeNotVerified */ echo __("Enabled"); ?></option>
+                                <option value="0" <?php if($stockStatus == 0): ?>selected<?php endif;?>><?php /* @escapeNotVerified */ echo __("Disabled"); ?></option>
+                                <option value="1" <?php if($stockStatus == 1): ?>selected<?php endif;?>><?php /* @escapeNotVerified */ echo __("Enabled"); ?></option>
                             </select>
                         </div>
                     </div>
@@ -145,7 +149,7 @@ if($block->isEditingTheProduct()){
                                         </label>
                                         <?php $attributeValue = $product->getCustomAttribute($customAttribute["attribute_code"])->getValue(); ?>
                                         <div class="control">
-                                            <select name="'custom_attributes[<?php echo $customAttribute["attribute_code"]; ?>]">
+                                            <select name="custom_attributes[<?php echo $customAttribute["attribute_code"]; ?>]">
                                                     id="<?php echo $customAttribute["attribute_code"]; ?>"
                                                     class="<?php echo $customAttribute["is_required"]? "required-entry" : ""; ?>"
                                                     <?php foreach ($customAttribute["options"] as $option): ?>
@@ -195,7 +199,8 @@ if($block->isEditingTheProduct()){
         storeCode = '<?php /* @escapeNotVerified */ echo $block->getCurrentWebsiteCode(); ?>';
         token = '<?php /* @escapeNotVerified */ echo $block->getToken(); ?>';
         sellerId  = '<?php /* @escapeNotVerified */ echo $block->getSellerId(); ?>';
-        sku = '<?php /* @escapeNotVerified */ echo $block->getProduct() != null?$block->getProduct()->getSku(): null; ?>'
+        sku = '<?php /* @escapeNotVerified */ echo $block->getProduct() != null?$block->getProduct()->getSku(): null; ?>';
+        productId = '<?php /* @escapeNotVerified */ echo $block->getProduct() != null?$block->getProduct()->getId(): 0; ?>';
     </script>
 
 </div>
