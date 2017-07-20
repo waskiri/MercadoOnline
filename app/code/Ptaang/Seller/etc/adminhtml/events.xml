@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Raul Encinas
+ * @copyright Copyright (c) 2016 Rulo (https://www.wagento.com)
+ * @package wage_rulesmayoreo
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_save_after">
+        <observer name="ptaang_seller_after_save_customer" instance="Ptaang\Seller\Observer\AfterCustomerSaveObserver" />
+    </event>
+</config>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="activate_seller_template"
+              label="Activate Seller by Mercado Online"
+              file="activate_seller_template.html" type="html"
+              module="Ptaang_Seller" area="frontend"/>
+</config>
