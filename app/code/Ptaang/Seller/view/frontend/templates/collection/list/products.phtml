@@ -13,7 +13,7 @@
 $products = $block->getProducts();
 $sellerId = $block->getSellerId();
 ?>
-<?php if(count($products)): ?>
+<?php if(count($products) > 0): ?>
     <div class="table-wrapper seller-product">
         <table class="data table table-seller-items" id="my-seller-products">
             <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('My Products') ?></caption>

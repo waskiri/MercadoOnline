@@ -104,7 +104,7 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
 
         /** Get the current Pager */
         $page = ($this->getRequest()->getParam('p')) ? $this->getRequest()->getParam('p') : 1;
-        $pageSize = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 1;
+        $pageSize = ($this->getRequest()->getParam('limit')) ? $this->getRequest()->getParam('limit') : 5;
 
         if($sellerId != null){
             /** Retrieve the products of the seller  */

@@ -47,11 +47,12 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
 
         /** array, for the moment is working with only one Order */
         $orderId = $observer->getEvent()->getData('order_ids');
-        if (empty($orderIds) || !is_array($orderIds) || count($orderIds) > 1) {
+        if (empty($orderId) || !is_array($orderId) || count($orderId) > 1) {
             return $this;
         }
         /* @var \Magento\Sales\Model\Order $order */
-        $order = $this->_order->load(reset($orderId));
+        $order = $this->_order->create();
+        $order = $order->load(reset($orderId));
 
         $sellers = [];
         foreach ($order->getAllVisibleItems() as $item){
@@ -65,16 +66,24 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
             if($sellerProduct && $sellerProduct->getId()){
                 /** Increase the Qty sold */
                 $qtySold = $sellerProduct->getData("qty_sold");
-                $sellerProduct->setData($qtySold + (int)$item->getQtyOrdered());
-
+                $sellerProduct->setData("qty_sold", ($qtySold + (int)$item->getQtyOrdered()));
+                $sellerProduct->save();
                 $sellerId = $sellerProduct->getData("seller_id");
                 $arrayProductSold = ["sku" => $product->getSku(), "qty" => (int)$item->getQtyOrdered()];
+                if(!array_key_exists($sellerId, $sellers)){
+                    $sellers[$sellerId] = [];
+                }
                 array_push($sellers[$sellerId], $arrayProductSold);
             }
         }
-        /** Send Emails to the seller about their products sold */
+        /** Send Emails to the seller about their products sold
+         * the key is the sellerId and the array is information about the Products and Qty Sold
+         */
         if(count($sellers) > 0){
-
+            $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/sellers.log');
+            $logger = new \Zend\Log\Logger();
+            $logger->addWriter($writer);
+            $logger->info(print_r($sellers, true));
         }
         return $this;
     }
