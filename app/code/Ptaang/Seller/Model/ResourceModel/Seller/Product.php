@@ -21,13 +21,16 @@ class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
      * @param \Ptaang\Seller\Model\Seller\Product $sellerProduct
      * @param int $sellerId
      * @param int $productId
-     * @return \Ptaang\Seller\Model\Seller\Product
+     * @return \Ptaang\Seller\Model\ResourceModel\Seller\Product
      */
-
     public function loadBySellerProduct(\Ptaang\Seller\Model\Seller\Product $sellerProduct, $sellerId, $productId)
     {
         $connection = $this->getConnection();
 
+        $bind = [
+            ':seller_id' => $sellerId,
+            ':product_id' => $productId,
+        ];
         $select = $connection->select()->from(
             $this->getMainTable()
         )->where(
@@ -36,7 +39,35 @@ class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
             'product_id = :product_id'
         );
 
-        $sellerProductId = $connection->fetchOne($select, [':seller_id' => $sellerId, ':product_id' => $productId]);
+        $sellerProductId = $connection->fetchOne($select, $bind);
+
+        if ($sellerProductId) {
+            $this->load($sellerProduct, $sellerProductId);
+        } else {
+            $sellerProduct->setData([]);
+        }
+        return $this;
+    }
+
+    /**
+     * Load by Product Id
+     * @param \Ptaang\Seller\Model\Seller\Product $sellerProduct
+     * @param int $productId
+     * @return \Ptaang\Seller\Model\ResourceModel\Seller\Product
+     */
+    public function loadByProductId(\Ptaang\Seller\Model\Seller\Product $sellerProduct, $productId){
+        $connection = $this->getConnection();
+        $bind = [
+            ':product_id' => $productId,
+        ];
+        $select = $connection->select()->from(
+            $this->getMainTable()
+        )->where(
+            'product_id = :product_id'
+        );
+
+        $sellerProductId = $connection->fetchOne($select, $bind);
+
         if ($sellerProductId) {
             $this->load($sellerProduct, $sellerProductId);
         } else {

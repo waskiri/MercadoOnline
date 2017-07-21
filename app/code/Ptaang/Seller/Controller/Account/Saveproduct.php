@@ -34,7 +34,7 @@ class Saveproduct extends \Magento\Framework\App\Action\Action {
      * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
      * @param \Magento\Framework\Controller\Result\RawFactory $resultRawFactory
      * @param \Magento\Framework\Json\Helper\Data $helper
-     * @param \Ptaang\Seller\Model\Seller\ProductFactory $productSellerFactory
+     * @param \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -75,15 +75,16 @@ class Saveproduct extends \Magento\Framework\App\Action\Action {
             $productId = (int)$productInformation["productId"];
             $sellerId =  (int)$productInformation["sellerId"];
             $sellerProductEntity = $this->_sellerProductFactory->create();
-            $sellerProductEntity->loadBySellerProduct($productId, $sellerId);
+            $sellerProductEntity->loadBySellerProduct($sellerId, $productId);
+
             if(!$sellerProductEntity->getId()){
                 $sellerProductEntity->setData('seller_id', $sellerId);
                 $sellerProductEntity->setData('product_id', $productId);
                 $sellerProductEntity->save();
                 $response["error"] = false;
-                $response["message"] = __("Save the product successfully");
+                $response["message"] = __("Save the product successfully.");
             }else{
-                $response["message"] = __("The product is associated to Seller");
+                $response["message"] = __("Edit the product successfully.");
             }
         }else{
             $response["message"] = __("Exist a problem ");

@@ -23,13 +23,13 @@ define(
                 productObject.product.media_gallery_entries = gallery;
             }
 
-            var messageSuccess = function(){
+            var messageSuccess = function(message){
                 newProduct.messageError(false);
-                newProduct.messageText($t("Create the product successfully"));
+                newProduct.messageText(message);
             };
-            var messageError = function(){
+            var messageError = function(message){
                 newProduct.messageError(true);
-                newProduct.messageText($t("Error creating or updating the product"));
+                newProduct.messageText(message);
             };
 
             return storage.put(
@@ -52,24 +52,24 @@ define(
                                     false
                                 ).done(
                                     function (response) {
-                                        messageSuccess();
+                                        messageSuccess(response.message);
                                         newProduct.formLoader(false);
                                     }
                                 ).fail(
                                     function () {
-                                        messageError();
+                                        messageError(response.message);
                                         newProduct.formLoader(false);
                                     }
                                 );
                             /** End call to the second controller */
                             }else{
-                                messageError();
+                                messageError($t("Error creating or updating the product"));
                                 newProduct.formLoader(false);
                             }
                         }
                     ).fail(
                         function () {
-                            messageError();
+                            messageError($t("Error creating or updating the product"));
                             newProduct.formLoader(false);
                         }
                     );

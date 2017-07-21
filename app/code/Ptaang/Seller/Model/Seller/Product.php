@@ -27,4 +27,14 @@ class Product extends \Magento\Framework\Model\AbstractModel {
         $this->_getResource()->loadBySellerProduct($this, $sellerId, $productId);
         return $this;
     }
+
+    /**
+     * Load by Product Id
+     * @param int $productId
+     * @return \Ptaang\Seller\Model\Seller\Product
+     */
+    public function loadByProductId($productId){
+        $this->_getResource()->loadByProductId($this, $productId);
+        return $this;
+    }
 }
