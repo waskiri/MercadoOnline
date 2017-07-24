@@ -147,8 +147,8 @@ class ListProducts extends \Magento\Customer\Block\Account\Dashboard
     public function getQtySold($productId, $sellerId){
         $qtySold = 0;
         $sellerProductEntity = $this->_sellerProductFactory->create();
-        $sellerProductEntity->loadBySellerProduct($productId, $sellerId);
-        if(!$sellerProductEntity->getId()){
+        $sellerProductEntity->loadBySellerProduct($sellerId, $productId);
+        if($sellerProductEntity->getId()){
             $qtySold = $sellerProductEntity->getData("qty_sold") ? $sellerProductEntity->getData("qty_sold") : 0;
         }
         return $qtySold;
