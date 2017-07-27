@@ -69,7 +69,10 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
                 $sellerProduct->setData("qty_sold", ($qtySold + (int)$item->getQtyOrdered()));
                 $sellerProduct->save();
                 $sellerId = $sellerProduct->getData("seller_id");
-                $arrayProductSold = ["sku" => $product->getSku(), "qty" => (int)$item->getQtyOrdered()];
+                $arrayProductSold = [
+                    "sku" => $product->getSku(),
+                    "qty" => (int)$item->getQtyOrdered(),
+                    "product_name" => $product->getName()];
                 if(!array_key_exists($sellerId, $sellers)){
                     $sellers[$sellerId] = [];
                 }

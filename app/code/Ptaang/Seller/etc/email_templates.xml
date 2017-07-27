@@ -4,4 +4,10 @@
               label="Activate Seller by Mercado Online"
               file="activate_seller_template.html" type="html"
               module="Ptaang_Seller" area="frontend"/>
+
+    <!-- Email when the -->
+    <template id="product_sold_template"
+              label="Email when a Product is Sold"
+              file="product_sold_template.html" type="html"
+              module="Ptaang_Seller" area="frontend"/>
 </config>
