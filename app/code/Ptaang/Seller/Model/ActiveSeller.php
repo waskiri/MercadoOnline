@@ -12,15 +12,18 @@ class ActiveSeller {
     
     protected $_scopeConfig;
     protected $_storeManager;
+    protected $_logger;
 
     public function __construct(
         TransportBuilder $transportBuilder,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Store\Model\StoreManagerInterface $storeManagerInterface
+        \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
+        \Psr\Log\LoggerInterface $logger
     ) {
         $this->transportBuilder = $transportBuilder;
         $this->_scopeConfig  = $scopeConfig;
         $this->_storeManager = $storeManagerInterface;
+        $this->_logger = $logger;
     }
 
     public function execute($customerData) {
@@ -39,7 +42,12 @@ class ActiveSeller {
             ->setFrom(['name' => $this->getConfig('trans_email/ident_general/name'),'email' => $this->getConfig('trans_email/ident_general/email')])
             ->addTo([$customerData->getEmail()])
             ->getTransport();
-        $transport->sendMessage();
+        try{
+            $transport->sendMessage();
+        } catch (\Exception $exception){
+            $this->_logger->error($exception->getMessage());
+        }
+
     }
     
     public function getConfig($path){
