@@ -22,8 +22,8 @@
                     <comment>The access token for use the Rest of Magento.</comment>
                 </field>
 
-            </group>
-            <group id="email_sold">
+            </group >
+            <group id="email_sold" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Emails Send when a Product is Sold</label>
                 <field id="sender_email" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email Sender</label>

@@ -1,7 +1,9 @@
 <!--@subject {{trans "Activate Seller by Mercado Online"}} @-->
 
 {{template config_path="design/email/header_template"}}
-
+<p class="greeting">{{var name}},</p>
+<p>{{trans "Your following products have been sold:"}}</p>
+{{block class='Magento\\Framework\\View\\Element\\Template' area='frontend' template='Ptaang_Seller::email/products.phtml' products=$products}}
 
 
 {{template config_path="design/email/footer_template"}}
