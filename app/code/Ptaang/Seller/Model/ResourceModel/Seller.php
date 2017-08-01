@@ -5,9 +5,13 @@
  */
 namespace Ptaang\Seller\Model\ResourceModel;
 
+//use Ptaang\Seller\Model\ActiveSeller;
+
 class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
     
-    protected $_request;
+    protected $_request;   
+    
+    protected $_activeSeller;
     
     /**
      * Resource initialization
@@ -40,6 +44,11 @@ class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
             $this->load($seller, $sellerId);
         } else {
             $seller->setData([]);
+            
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $activateSeller = $objectManager->create('Ptaang\Seller\Model\ActiveSeller');
+            
+            $activateSeller->SendEmail($customerId);
         }
         return $this;
     }

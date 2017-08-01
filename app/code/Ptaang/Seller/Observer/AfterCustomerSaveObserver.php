@@ -31,11 +31,10 @@ class AfterCustomerSaveObserver implements ObserverInterface
         $customerData = $event->getCustomer();
         
         $collection_group = $this->_customerGroupCollection->load($customerData->getGroupId()); 
-        //echo $collection_group->getCustomerGroupCode();exit();//echo json_encode($observer->getEvent()->getCustomer()->getData());exit();
+        
         if($collection_group->getCustomerGroupCode() == 'Seller'){
             //send email notification active seller
             $this->_activeSeller->execute($customerData);
-            ///echo '';
         }
     }
 }

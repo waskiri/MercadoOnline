@@ -1,0 +1,10 @@
+<!--@subject {{trans "Activate Seller"}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "I am "}}{{var data.name}}{{trans ", request to change my account to seller."}}</p>
+<ul>
+    <li><strong>{{trans "Email:"}}</strong> {{var data.email}}</li>
+</ul>
+
+{{template config_path="design/email/footer_template"}}

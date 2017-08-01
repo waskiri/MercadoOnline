@@ -12576,3 +12576,7 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "I Want To Be A Seller","Quiero ser un vendedor",module,Ptaang_Seller
 "Your account was activated with seller.","Su cuenta se activó como vendedor.",module,Ptaang_Seller
 "Activate Seller by Mercado Online","Activar Vendedor por Mercado Online",module,Ptaang_Seller
+"I am ","Soy ",module,Ptaang_Seller
+", request to change my account to seller.",", solicito cambiar mi cuenta a vendedor.",module,Ptaang_Seller
+"List of my Products","Mi lista de Productos",module,Ptaang_Seller
+"Your nit was added to be a seller, you will receive an email to confirm your activation.","Se agregó su nit para ser un vendedor, usted recibirá un correo electrónico confirmando su activación.",module,Ptaang_Seller
