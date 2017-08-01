@@ -11,6 +11,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
     CONST XML_PATH_TOKEN = "seller/api/key";
 
+
+    CONST XML_PATH_SENDER_SOLD_PRODUCT = "seller/email_sold/sender_email";
+    CONST XML_PATH_EMAIL_SOLD_PRODUCT = "seller/email_sold/email_template";
+
     /**
      * @var \Ptaang\Seller\Model\Seller
      */
@@ -45,6 +49,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * Get Email Template when a product is sold
+     * @return string
+     */
+    public function getTemplateEmailSoldProduct(){
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_EMAIL_SOLD_PRODUCT,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Get sender of the Email
+     * @return string
+     */
+    public function getSenderEmailSoldProduct(){
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_SENDER_SOLD_PRODUCT,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
 
     /**
      * Get Seller Id given a customer Id
@@ -95,4 +122,5 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
         }
         return $attributes;
     }
+
 }

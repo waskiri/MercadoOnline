@@ -7,6 +7,11 @@
               
     <template id="activate_seller_template_front"
               label="Activate Seller by Customer"
-              file="activate_seller_template_front.html" type="html"
+              file="activate_seller_template_front.html" type="html"/>
+
+    <!-- Email when the -->
+    <template id="seller_email_sold_email_template"
+              label="Email when a Product is Sold"
+              file="product_sold_template.html" type="html"
               module="Ptaang_Seller" area="frontend"/>
 </config>

@@ -13,13 +13,13 @@
                 <argument name="label" xsi:type="string">I Want To Be A Seller</argument>
             </arguments>
         </block>
-        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-new-product">
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-new-product-seller">
             <arguments>
                 <argument name="path" xsi:type="string">seller/account/newproduct</argument>
                 <argument name="label" xsi:type="string">Add A New Product</argument>
             </arguments>
         </block>
-        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-list-product">
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-list-product-seller">
             <arguments>
                 <argument name="path" xsi:type="string">seller/account/listproducts</argument>
                 <argument name="label" xsi:type="string">List of my Products</argument>

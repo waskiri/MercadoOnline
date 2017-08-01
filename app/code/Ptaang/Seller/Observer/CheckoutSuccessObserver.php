@@ -25,15 +25,23 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
     protected $_order;
 
     /**
+     * @var \Ptaang\Seller\Model\SendMailByProductSold
+     */
+    protected $_sendEmailProductSold;
+
+    /**
      * SaveOrderSuccessSalesModelQuoteObserver constructor.
      * @param \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory
+     * @param \Ptaang\Seller\Model\SendMailByProductSold $sendEmailProductSold
      * @param \Magento\Sales\Model\OrderFactory $order
      */
     public function __construct(
         \Ptaang\Seller\Model\Seller\ProductFactory $sellerProductFactory,
+        \Ptaang\Seller\Model\SendMailByProductSold $sendEmailProductSold,
         \Magento\Sales\Model\OrderFactory $order
     ){
        $this->_sellerProductFactory = $sellerProductFactory;
+       $this->_sendEmailProductSold = $sendEmailProductSold;
        $this->_order = $order;
     }
 
@@ -69,7 +77,10 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
                 $sellerProduct->setData("qty_sold", ($qtySold + (int)$item->getQtyOrdered()));
                 $sellerProduct->save();
                 $sellerId = $sellerProduct->getData("seller_id");
-                $arrayProductSold = ["sku" => $product->getSku(), "qty" => (int)$item->getQtyOrdered()];
+                $arrayProductSold = [
+                    "sku" => $product->getSku(),
+                    "qty" => (int)$item->getQtyOrdered(),
+                    "product_name" => $product->getName()];
                 if(!array_key_exists($sellerId, $sellers)){
                     $sellers[$sellerId] = [];
                 }
@@ -80,6 +91,9 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
          * the key is the sellerId and the array is information about the Products and Qty Sold
          */
         if(count($sellers) > 0){
+            foreach ($sellers as $key => $value){
+                $this->_sendEmailProductSold->execute($value, $key);
+            }
             $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/sellers.log');
             $logger = new \Zend\Log\Logger();
             $logger->addWriter($writer);

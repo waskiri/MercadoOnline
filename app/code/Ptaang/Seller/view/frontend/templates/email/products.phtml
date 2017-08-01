@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2017 Ptang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+?>
+<?php $products = $block->getProducts(); ?>
+<?php if(count($products) > 0): ?>
+<table class="shipment-track">
+    <thead>
+        <tr>
+            <th><?= /* @escapeNotVerified */  __('SKU') ?></th>
+            <th><?= /* @escapeNotVerified */  __('QTY') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($products as $product): ?>
+        <tr>
+            <td><?php echo $product["sku"]; ?></td>
+            <td><?php echo $product["qty"]; ?></td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>
+<?php endif; ?>

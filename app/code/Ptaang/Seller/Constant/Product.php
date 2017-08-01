@@ -11,4 +11,20 @@ class Product {
      * type attribute product Id, 4 means catalog product
      */
     CONST ATTRIBUTE_SET_ID = "4";
+
+    /**
+     * Const for the URL
+     */
+    CONST XML_PATH_URL_CUSTOMER = "customer/account";
+    CONST XML_PATH_URL_SELLER   = "seller/account";
+
+    /**
+     * Group code
+     */
+    CONST SELLER_GROUP_CODE = "Seller";
+
+    /**
+     * Links name
+     */
+    CONST LINKS_SELLER_NAME = "seller";
 }
