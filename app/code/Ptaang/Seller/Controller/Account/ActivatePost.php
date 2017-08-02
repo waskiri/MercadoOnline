@@ -91,6 +91,14 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
                             )->save();
                             
                 $this->_messageManager->addSuccess(__("Your nit was added to be a seller, you will receive an email to confirm your activation."));
+                
+                //send email
+                
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                $activateSeller = $objectManager->create('Ptaang\Seller\Model\ActiveSeller');
+                
+                $activateSeller->SendEmail($customerId);
+                
             }catch (Exception $e){
                 $this->_messageManager->addError(__('Unexpected error', $e));
             }
