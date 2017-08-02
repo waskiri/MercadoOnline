@@ -94,10 +94,10 @@ class CheckoutSuccessObserver implements \Magento\Framework\Event\ObserverInterf
             foreach ($sellers as $key => $value){
                 $this->_sendEmailProductSold->execute($value, $key);
             }
-            $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/sellers.log');
+            /*$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/sellers.log');
             $logger = new \Zend\Log\Logger();
             $logger->addWriter($writer);
-            $logger->info(print_r($sellers, true));
+            $logger->info(print_r($sellers, true));*/
         }
         return $this;
     }

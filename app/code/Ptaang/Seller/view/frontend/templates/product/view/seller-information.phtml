@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2017 Ptaang, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Ptaang\Seller\Block\Product\View\SellerInformation $block */
+$productInformation = $block->getSellerInformation();
+?>
+
+<div>
+    <h4><?php /* @escapeNotVerified */  echo __("Seller Information"); ?></h4>
+    <div>
+        <?php if(count($productInformation) > 0): ?>
+            <dl>
+                <dt><?php /* @escapeNotVerified */  echo __("Name Seller"); ?></dt>
+                <dd><?php echo $productInformation["name"]; ?></dd>
+                <dt><?php /* @escapeNotVerified */  echo __("Email"); ?></dt>
+                <dd><?php echo $productInformation["email"]; ?></dd>
+                <dt><?php /* @escapeNotVerified */  echo __("Product's quantity sold "); ?></dt>
+                <dd><?php echo $productInformation["qty_sold"]; ?></dd>
+            </dl>
+        <?php endif; ?>
+    </div>
+</div>
