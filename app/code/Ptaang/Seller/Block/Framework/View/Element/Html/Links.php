@@ -54,51 +54,41 @@ class Links extends \Magento\Framework\View\Element\Html\Links {
      */
     public function getChildHtml($alias = '', $useCache = true)
     {
-        $url = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
 
         /** If enter to yes, the customer is on the DashBoard Panel */
-        if (strpos($url, \Ptaang\Seller\Constant\Product::XML_PATH_URL_CUSTOMER) !== false ||
-                strpos($url, \Ptaang\Seller\Constant\Product::XML_PATH_URL_SELLER) !== false) {
-
-            if(!$this->customerSession->isLoggedIn()){
-                return "";
-            }
-            $layout = $this->getLayout();
-            if (!$layout) {
-                return '';
-            }
-
-            $customer = $this->customerSession->getCustomer();
-            $sellerId = $this->helperSeller->getSellerId($customer->getId());
-            $groupId = $customer->getGroupId();
-            $groupCode = $this->groupFactory->create()->load($groupId)->getCode();
-
-            $name = $this->getNameInLayout();
-            $out = '';
-            if ($alias) {
-                $childName = $layout->getChildName($name, $alias);
-                if ($childName) {
-                    $out = $layout->renderElement($childName, $useCache);
-                }
-            } else {
-                foreach ($layout->getChildNames($name) as $child) {
-                    /** Check if is Seller Link */
-                    if(strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_NAME)!== false ){
-                        if(($sellerId && $sellerId != 0 &&
-                            $groupCode == \Ptaang\Seller\Constant\Product::SELLER_GROUP_CODE) ||
-                            strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_EXCEPTION) !== false){
-                            /** Add a custom class */
-                            $out .= str_replace('<li class="nav item', '<li class="nav item seller ', $layout->renderElement($child, $useCache));
-                        }
-                    }else{
-                        $out .= $layout->renderElement($child, $useCache);
-                    }
-                }
-            }
-            return $out;
-        } else {
-            return parent::getChildChildHtml($alias, $useCache);
+        $layout = $this->getLayout();
+        if (!$layout) {
+            return '';
         }
+
+        $customer = $this->customerSession->getCustomer();
+        $sellerId = $this->helperSeller->getSellerId($customer->getId());
+        $groupId = $customer->getGroupId();
+        $groupCode = $this->groupFactory->create()->load($groupId)->getCode();
+
+        $name = $this->getNameInLayout();
+        $out = '';
+        if ($alias) {
+            $childName = $layout->getChildName($name, $alias);
+            if ($childName) {
+                $out = $layout->renderElement($childName, $useCache);
+            }
+        } else {
+            foreach ($layout->getChildNames($name) as $child) {
+                /** Check if is Seller Link */
+                if(strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_NAME)!== false ){
+                    if(($sellerId && $sellerId != 0 &&
+                            $groupCode == \Ptaang\Seller\Constant\Product::SELLER_GROUP_CODE) ||
+                        strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_EXCEPTION) !== false){
+                        /** Add a custom class */
+                        $out .= str_replace('<li class="nav item', '<li class="nav item seller ', $layout->renderElement($child, $useCache));
+                    }
+                }else{
+                    $out .= $layout->renderElement($child, $useCache);
+                }
+            }
+        }
+        return $out;
 
     }
 }

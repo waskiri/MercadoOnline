@@ -12580,3 +12580,10 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 ", request to change my account to seller.",", solicito cambiar mi cuenta a vendedor.",module,Ptaang_Seller
 "List of my Products","Mi lista de Productos",module,Ptaang_Seller
 "Your nit was added to be a seller, you will receive an email to confirm your activation.","Se agregó su nit para ser un vendedor, usted recibirá un correo electrónico confirmando su activación.",module,Ptaang_Seller
+"Activate Seller Account","Activar la cuenta de vendedor",module,Ptaang_Seller
+"Activate My Account for being a seller", "Activar la cuenta para ser vendedor",module,Ptaang_Seller
+"Product information","Información del producto",module,Ptaang_Seller
+"Choose the type of Product","Escoja el tipo de producto",module,Ptaang_Seller
+"Choose your type Product...","Escoja su producto...",module,Ptaang_Seller
+"Add a price with 2 decimals for example: 12.00 or 12.50","Agregue el precio con decimales por ejemplo: 12.00  o 12.50",module,Ptaang_Seller
+"Product Images","Imagenes del Producto",module,Ptaang_Seller
