@@ -83,9 +83,10 @@ class Links extends \Magento\Framework\View\Element\Html\Links {
             } else {
                 foreach ($layout->getChildNames($name) as $child) {
                     /** Check if is Seller Link */
-                    if(strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_NAME)!== false){
-                        if($sellerId && $sellerId != 0 &&
-                            $groupCode == \Ptaang\Seller\Constant\Product::SELLER_GROUP_CODE){
+                    if(strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_NAME)!== false ){
+                        if(($sellerId && $sellerId != 0 &&
+                            $groupCode == \Ptaang\Seller\Constant\Product::SELLER_GROUP_CODE) ||
+                            strpos($child, \Ptaang\Seller\Constant\Product::LINKS_SELLER_EXCEPTION) !== false){
                             /** Add a custom class */
                             $out .= str_replace('<li class="nav item', '<li class="nav item seller ', $layout->renderElement($child, $useCache));
                         }

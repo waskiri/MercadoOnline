@@ -18,6 +18,8 @@ class Product {
     CONST XML_PATH_URL_CUSTOMER = "customer/account";
     CONST XML_PATH_URL_SELLER   = "seller/account";
 
+
+
     /**
      * Group code
      */
@@ -27,4 +29,5 @@ class Product {
      * Links name
      */
     CONST LINKS_SELLER_NAME = "seller";
+    CONST LINKS_SELLER_EXCEPTION = "activate-seller";
 }
