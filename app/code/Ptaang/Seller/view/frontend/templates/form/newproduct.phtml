@@ -165,15 +165,23 @@ if($block->isEditingTheProduct()){
                         </fieldset>
                     <?php endif; ?>
                 <?php else: ?>
-                    <fieldset class="fieldset extra-info" data-bind="foreach: { data: newProduct.attributes, as: 'attribute' }">
+                    <fieldset class="fieldset extra-info">
                         <legend class="legend">
                             <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
                         </legend>
-                        <!-- ko if: (attribute.frontend_input == 'select') -->
-                            <!-- ko foreach: $parent.getRegion('attributeSelect') -->
-                                <!-- ko template: {name: getTemplate(), data: attribute } --><!-- /ko -->
+                        <div data-bind="foreach: { data: newProduct.attributes, as: 'attribute' }">
+                            <!-- ko if: (attribute.frontend_input == 'select') -->
+                                <!-- ko foreach: $parent.getRegion('attributeSelect') -->
+                                    <!-- ko template: {name: getTemplate(), data: attribute } --><!-- /ko -->
+                                <!-- /ko -->
                             <!-- /ko -->
-                        <!-- /ko -->
+                            <!-- ko if: (attribute.frontend_input == 'boolean') -->
+                                <!-- ko foreach: $parent.getRegion('attributeBoolean') -->
+                                    <!-- ko template: {name: getTemplate(), data: attribute } --><!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+
                     </fieldset>
                 <?php endif; ?>
 
@@ -188,6 +196,7 @@ if($block->isEditingTheProduct()){
             </form>
         </div>
     </div>
+    <?php echo $block->getJsLayout(); ?>
     <script type="text/x-magento-init">
            {
                "#new-product-form": {

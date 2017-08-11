@@ -12587,3 +12587,6 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "Choose your type Product...","Escoja su producto...",module,Ptaang_Seller
 "Add a price with 2 decimals for example: 12.00 or 12.50","Agregue el precio con decimales por ejemplo: 12.00  o 12.50",module,Ptaang_Seller
 "Product Images","Imagenes del Producto",module,Ptaang_Seller
+"Estatus","Habilitado para venderse",module,Ptaang_Seller
+"Short Description","Breve descripcion",module,Ptaang_Seller
+"Product extra information","Informacion adicional del producto",module,Ptaang_Seller

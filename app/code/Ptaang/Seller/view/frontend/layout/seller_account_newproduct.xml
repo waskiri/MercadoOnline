@@ -51,6 +51,13 @@
                                             <item name="template" xsi:type="string">Ptaang_Seller/fieldset/attribute-select</item>
                                         </item>
                                     </item>
+                                    <item name="attributeBoolean" xsi:type="array">
+                                        <item name="component" xsi:type="string">Ptaang_Seller/js/view/fieldset/attribute</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="displayArea" xsi:type="string" translate="true">attributeBoolean</item>
+                                            <item name="template" xsi:type="string">Ptaang_Seller/fieldset/attribute-boolean</item>
+                                        </item>
+                                    </item>
                                 </item>
                             </item>
                         </item>
