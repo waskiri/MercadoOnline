@@ -48,6 +48,15 @@
         </referenceContainer>
         <referenceBlock name="report.bugs" remove="true"/>
         <referenceBlock name="footer" remove="true"/>
+
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="privacy-policy-link">
+                <arguments>
+                    <argument name="label" xsi:type="string">¿Quieres publicar tus productos?</argument>
+                    <argument name="path" xsi:type="string">como-publicar-tus-productos</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
         <!--<move element="copyright" destination="before.body.end"/>-->
     </body>
 </page>
