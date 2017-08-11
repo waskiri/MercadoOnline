@@ -142,21 +142,35 @@ if($block->isEditingTheProduct()){
                                 <?php /* @escapeNotVerified */ echo __("Product extra information"); ?>
                             </legend>
                             <?php foreach ($customAttributes as $customAttribute): ?>
-                                <?php if($customAttribute["frontend_input"] == "select"): ?>
+                                <?php if($customAttribute["frontend_input"] == "select" ||
+                                    $customAttribute["frontend_input"] = "boolean"): ?>
                                     <div class="field required field-<?php echo $customAttribute["attribute_code"]?>">
                                         <label class="label" for="<?php echo $customAttribute["attribute_code"]; ?>" >
                                             <?php echo $customAttribute["frontend_label"]; ?>
                                         </label>
-                                        <?php $attributeValue = $product->getCustomAttribute($customAttribute["attribute_code"])->getValue(); ?>
                                         <div class="control">
+                                            <?php $attributeValue = null; ?>
+                                            <?php if($customAttributeValue = $product->getCustomAttribute($customAttribute["attribute_code"])): ?>
+                                                <?php $attributeValue = $customAttributeValue->getValue(); ?>
+                                            <?php endif; ?>
                                             <select name="custom_attributes[<?php echo $customAttribute["attribute_code"]; ?>]">
-                                                    id="<?php echo $customAttribute["attribute_code"]; ?>"
-                                                    class="<?php echo $customAttribute["is_required"]? "required-entry" : ""; ?>"
+                                                id="<?php echo $customAttribute["attribute_code"]; ?>"
+                                                class="<?php echo $customAttribute["is_required"]? "required-entry" : ""; ?>"
+                                                <?php if($customAttribute["frontend_input"] == "boolean"): ?>
+                                                    <option value="1" <?php echo $attributeValue == 1 ?"selected":""; ?>>
+                                                        <?php echo __("yes"); ?>
+                                                    </option>
+                                                    <option value="0" <?php echo $attributeValue == 1 ?"selected":""; ?>>
+                                                        <?php echo __("no"); ?>
+                                                    </option>
+                                                <?php else: ?>
                                                     <?php foreach ($customAttribute["options"] as $option): ?>
                                                         <option value="<?php echo $option["value"]; ?>" <?php echo $attributeValue == $option["value"]?"selected":""; ?>>
                                                             <?php echo $option["label"]; ?>
                                                         </option>
                                                     <?php endforeach; ?>
+                                                <?php endif; ?>
+
                                             </select>
                                         </div>
                                     </div>

@@ -138,7 +138,7 @@ define([
                     position: i,
                     media_type: 'image',
                     disabled: false,
-                    types: i == 1 ? ['image','small_image','thumbnail'] : [],
+                    types: i == 0 ? ['image','small_image','thumbnail'] : [],
                     content: {
                         type: imageType,
                         name: image.name
