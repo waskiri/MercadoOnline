@@ -12593,3 +12593,5 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "Choose your image","Agregue imagenes",module,Ptaang_Seller
 "Products More Sold","Los productos mas vendidos",module,Ptaang_Seller
 "Post Now","Publica Ahora"
+"Post Now","Publica Ahora",module,Ptaang_Seller
+"Your nit is already in the validation process","Su nit ya está en el proceso de validación",module,Ptaang_Seller
