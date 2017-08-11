@@ -8,24 +8,29 @@
 
 /** @var \Ptaang\Seller\Block\Collection\ListProductsMoreSold $block */
 ?>
-<h3><?php echo /* @escapeNotVerified */ __("Products More Sold"); ?></h3>
-<div class="products wrapper grid products-grid">
-    <ol class="products list items product-items">
-        <?php $items = $block->getItemsMoreSold(); ?>
-        <?php foreach ($items as $item): ?>
-        <?php
-            /** @var \\Magento\Catalog\Model\Product  $item */
-            ?>
-        <li class="item product product-item">
-            <div class="product details product-item-details">
-                <strong class="product name product-item-name">
-                    <a class="product-item-link" href="<?php echo $item->getProductUrl();?>">
-                        <?php echo $item->getName(); ?>
-                    </a>
-                </strong>
-            </div>
-            <?php echo $block->getImage($item, 'cart_page_product_thumbnail')->toHtml(); ?>
-        </li>
-        <?php endforeach; ?>
-    </ol>
+<div class="block-grid">
+    <div class="block-title">
+        <strong><?php echo /* @escapeNotVerified */ __("Products More Sold"); ?></strong>
+    </div>
+    <div class="products wrapper grid products-grid">
+        <ol class="products list items product-items">
+            <?php $items = $block->getItemsMoreSold(); ?>
+            <?php foreach ($items as $item): ?>
+                <?php
+                /** @var \\Magento\Catalog\Model\Product  $item */
+                ?>
+                <li class="item product product-item">
+                    <div class="product details product-item-details">
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link" href="<?php echo $item->getProductUrl();?>">
+                                <?php echo $item->getName(); ?>
+                            </a>
+                        </strong>
+                    </div>
+                    <?php echo $block->getImage($item, 'cart_page_product_thumbnail')->toHtml(); ?>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+
 </div>
