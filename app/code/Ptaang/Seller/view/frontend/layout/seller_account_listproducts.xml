@@ -15,7 +15,7 @@
 
         <referenceBlock name="page.main.title">
             <action method="setPageTitle">
-                <argument translate="true" name="title" xsi:type="string">Edit Product</argument>
+                <argument translate="true" name="title" xsi:type="string">List of my Products</argument>
             </action>
         </referenceBlock>
 
