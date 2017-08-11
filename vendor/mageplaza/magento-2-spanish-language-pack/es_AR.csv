@@ -12590,4 +12590,5 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "Estatus","Habilitado para venderse",module,Ptaang_Seller
 "Short Description","Breve descripcion",module,Ptaang_Seller
 "Product extra information","Informacion adicional del producto",module,Ptaang_Seller
-"Post Now","Publica Ahora"
+"Post Now","Publica Ahora",module,Ptaang_Seller
+"Your nit is already in the validation process","Su nit ya está en el proceso de validación",module,Ptaang_Seller
