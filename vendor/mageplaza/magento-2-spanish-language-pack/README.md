@@ -33,10 +33,8 @@ Install the Spanish language pack via composer is never easier.
 **Install Spanish pack**:
 
 ```
-composer require mageplaza/magento-2-spanish-language-pack:dev-master
-php bin/magento cache:clean
+composer require mageplaza/magento-2-spanish-language-pack
 php bin/magento setup:static-content:deploy es_AR
-php bin/magento indexer:reindex
 php bin/magento cache:clean
 php bin/magento cache:flush
 
@@ -46,8 +44,7 @@ php bin/magento cache:flush
 **Update  Spanish pack**:
 
 ```
-composer update mageplaza/magento-2-spanish-language-pack:dev-master
-php bin/magento cache:clean
+composer update mageplaza/magento-2-spanish-language-pack
 php bin/magento setup:static-content:deploy es_AR
 php bin/magento indexer:reindex
 php bin/magento cache:clean
@@ -57,7 +54,7 @@ php bin/magento cache:flush
 
 #### Authentication required (Optional)
 
-![Authentication required](https://i.imgur.com/dmryiPk.png)
+![Authentication required](https://cdn.mageplaza.com/media/general/dmryiPk.png)
 
 If you have not added this authentication, you can follow [this guide](http://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html)
 
@@ -113,7 +110,7 @@ Follow this guide to [Flush Cache on your Magento 2 store](https://www.mageplaza
 ## How to active language pack
 
 Now time to active the language pack for your Magento 2 store. From Magento 2 admin panel, navigate to `Stores > Configuration > General > Locale Options`
-![{{Magento 2 Spanish language pack}}](https://i.imgur.com/aPSUA0l.png)
+![{{Magento 2 Spanish language pack}}](https://cdn.mageplaza.com/media/general/aPSUA0l.png)
 
 
 <!-- ## Translation process of Spanish Language Pack
@@ -137,6 +134,8 @@ Contribute to this language at https://crowdin.com/project/magento-2/es_AR
 - Magento v2.0.11
 - Magento v2.0.12
 - Magento v2.0.13
+- Magento v2.0.14
+- Magento v2.0.15
 - Magento v2.1.0
 - Magento v2.1.1
 - Magento v2.1.2
@@ -144,6 +143,7 @@ Contribute to this language at https://crowdin.com/project/magento-2/es_AR
 - Magento v2.1.4
 - Magento v2.1.5
 - Magento v2.1.6
+- Magento v2.1.7
 
 
 
