@@ -30,5 +30,5 @@ class Product {
      * Links name
      */
     CONST LINKS_SELLER_NAME = "seller";
-    CONST LINKS_SELLER_EXCEPTION = "activate-seller";
+    CONST LINKS_SELLER_EXCEPTION = "seller/account/activate";
 }

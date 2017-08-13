@@ -76,7 +76,7 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
         $seller     = $this->sellerFactory->create()->loadByCustomerId($customerId);
         if($seller && $seller->getId()){ //The Seller exists
             //redirect before
-            $this->_messageManager->addNotice('Your nit is already in the validation process');
+            $this->_messageManager->addNotice(__('Your nit is already in the validation process'));
         }else{
             //save the information in the seller table
             $seller_params = $params['seller'];

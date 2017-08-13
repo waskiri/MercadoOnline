@@ -75,7 +75,17 @@
     body {
         .lib-css(background-color, @page__background-color);
     }
+    .nav.item.seller {
 
+        a {
+            .lib-css(background-color, @base-color);
+            color: @color-white;
+            &:hover {
+                background-color: @base-color-light !important;
+            }
+        }
+
+    }
     .cms-index-index .magestore-bannerslider-title {
         display: none;
     }

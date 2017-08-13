@@ -26,16 +26,33 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
      */
     protected $_collectionAttributeFactory;
 
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
 
     /**
+     * @var \Magento\Customer\Model\GroupFactory
+     */
+    protected $_groupFactory;
+
+    /**
+     * Data constructor.
      * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Ptaang\Seller\Model\SellerFactory $sellerFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory
+     * @param \Magento\Customer\Model\Session $customerSession
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Ptaang\Seller\Model\SellerFactory $sellerFactory,
-        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory){
+        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $collectionAttributeFactory,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Customer\Model\GroupFactory $groupFactory){
         $this->_collectionAttributeFactory = $collectionAttributeFactory;
         $this->seller = $sellerFactory;
+        $this->_customerSession = $customerSession;
+        $this->_groupFactory = $groupFactory;
         parent::__construct($context);
     }
 
@@ -72,6 +89,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
         );
     }
 
+    /**
+     * Check if the Customer is Seller
+     * @return boolean
+     */
+    public function isSeller(){
+        $isSeller = false;
+        if($this->_customerSession->getCustomer() &&
+            $customerId = $this->_customerSession->getCustomer()->getId()){
+            $sellerId = $this->getSellerId($customerId);
+            if($sellerId && $sellerId > 0) $isSeller = true;
+        }
+        return $isSeller;
+    }
 
     /**
      * Get Seller Id given a customer Id
@@ -86,6 +116,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
             $sellerId = $seller->getId();
         }
         return $sellerId;
+    }
+
+    /**
+     * Get Group Id
+     * @return string group
+     */
+    public function getGroupName(){
+        $groupCode = "";
+        if($this->_customerSession->getCustomer() &&
+            $customer = $this->_customerSession->getCustomer()){
+            $groupId = $customer->getGroupId();
+            $groupCode = $this->_groupFactory->create()->load($groupId)->getCode();
+        }
+        return $groupCode;
     }
 
     /**
