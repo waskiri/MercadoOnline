@@ -8,7 +8,7 @@
         "AFL-3.0"
     ],
     "require": {
-        "magento/product-community-edition": "2.1.6",
+        "magento/product-community-edition": "2.1.8",
         "composer/composer": "@alpha",
         "mageplaza/magento-2-spanish-language-pack": "dev-master"
     },
