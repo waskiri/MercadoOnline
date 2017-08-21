@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright � 2017 Ptaang, Inc. All rights reserved.
+ * Copyright � 2017 Ptaang, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
  
@@ -51,6 +51,84 @@ class UpgradeData implements  UpgradeDataInterface
                 ->setCode('Seller')
                 ->setTaxClassId(3) // magic numbers OK, core installers do it?!
                 ->save();
+        }else if(version_compare($context->getVersion(), '1.0.3') < 0){
+            /** Add the departments of Bolivia */
+            /** Country Id BO */
+            $connection = $setup->getConnection();
+            /** Beni BNI*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'BNI',
+                    'default_name' => 'Beni',
+                ]
+            );
+            /** Chuquisaca CHQ*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'CHQ',
+                    'default_name' => 'Chuquisaca',
+                ]
+            );
+            /** Cochabamba CBA*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'CBA',
+                    'default_name' => 'Cochabamba',
+                ]
+            );
+            /** La Paz LPZ*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'LPZ',
+                    'default_name' => 'La Paz',
+                ]
+            );
+            /** Oruro ORU*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'ORU',
+                    'default_name' => 'Oruro',
+                ]
+            );
+            /** Potosí PSI*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'PSI',
+                    'default_name' => 'Potosí',
+                ]
+            );
+
+            /** Santa Cruz SCZ*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'SCZ',
+                    'default_name' => 'Santa Cruz',
+                ]
+            );
+
+            /** Tarija SCZ*/
+            $connection->insert(
+                $setup->getTable('directory_country_region'),
+                [
+                    'country_id' => 'BO',
+                    'code' => 'TJA',
+                    'default_name' => 'Tarija',
+                ]
+            );
         }
 
         $setup->endSetup();
