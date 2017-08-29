@@ -12595,3 +12595,18 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "Post Now","Publica Ahora"
 "Post Now","Publica Ahora",module,Ptaang_Seller
 "Your nit is already in the validation process","Su nit ya está en el proceso de validación",module,Ptaang_Seller
+"Store pickup","Localizador de Tiendas"
+"Search by distance","Búsqueda por distancia"
+"Search by area","Búsqueda por área"
+"Street View","Vista de Calle"
+"Direction","Dirección"
+"Store list","Lista de Tiendas"
+"%s Stores","%s Stores"
+"Enter a location...","Ingresa una ubicación..."
+"Select country","Seleccionar País"
+"Select Country","Seleccionar País"
+"Address:","Dirección:"
+"Phone:","Telefono:"
+"Enter a location","Ingresar una Dirección"
+"Store Infomation","Información de la Tienda"
+"Opening hours","Horario de Atención"
