@@ -2,7 +2,6 @@
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\Exception\InactiveScopeException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -31,9 +30,11 @@ class ProjectServiceContainer extends Container
     }
 
     /**
-     * Gets the public 'foo' shared autowired service.
+     * Gets the 'foo' service.
      *
-     * @return \Foo
+     * This service is autowired.
+     *
+     * @return \Foo A Foo instance
      */
     protected function getFooService()
     {

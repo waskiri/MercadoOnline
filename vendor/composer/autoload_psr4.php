@@ -49,6 +49,7 @@ return array(
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Pelago\\' => array($vendorDir . '/pelago/emogrifier/Classes'),
+    'PDepend\\' => array($vendorDir . '/pdepend/pdepend/src/main/php/PDepend'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mageplaza\\Core\\' => array($vendorDir . '/mageplaza/module-core'),
     'Magento\\Wishlist\\' => array($vendorDir . '/magento/module-wishlist'),

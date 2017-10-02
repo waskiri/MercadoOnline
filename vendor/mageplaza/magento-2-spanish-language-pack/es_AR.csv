@@ -12599,3 +12599,5 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "Edit Product","Editar Producto",module,Ptaang_Seller
 "Create Product","Guardar Cambios",module,Ptaang_Seller
 "This is a required field.","Este es un campo obligatorio.",module,Magento_Customer
+"Password Strength","Seguridad de la contraseña"
+"No Password","Sin contraseña"

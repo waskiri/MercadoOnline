@@ -39,5 +39,15 @@
             </block>
         </referenceContainer>
         <move element="page.main.title" destination="content.top" before="-"/>
+        <!-- Downloadable product link -->
+        <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true"/>
+        <!-- My credit card link -->
+        <referenceBlock name="customer-account-navigation-my-credit-cards-link" remove="true"/>
+        <!-- Billing agreement link -->
+        <referenceBlock name="customer-account-navigation-billing-agreements-link" remove="true"/>
+        <!-- Product review link -->
+        <referenceBlock name="customer-account-navigation-product-reviews-link" remove="true"/>
+        <!-- Wish list link -->
+        <referenceBlock name="customer-account-navigation-wish-list-link" remove="true"/>
     </body>
 </page>
