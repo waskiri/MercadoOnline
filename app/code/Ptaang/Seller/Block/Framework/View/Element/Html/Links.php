@@ -112,8 +112,11 @@ class Links extends \Magento\Framework\View\Element\Html\Links {
                 $url = $link->getHref();
                 if($isSeller && ($groupCode == \Ptaang\Seller\Constant\Product::SELLER_GROUP_CODE)){
                     if(strpos($url, \Ptaang\Seller\Constant\Product::LINKS_SELLER_NAME) !== false){
-                        $html .= str_replace('<li class="nav item', '<li class="nav item seller ',
+                        if(!strpos($url, \Ptaang\Seller\Constant\Product::LINKS_SELLER_EXCEPTION)){
+                            $html .= str_replace('<li class="nav item', '<li class="nav item seller ',
                                                 $this->renderLink($link));
+                        }
+                        
                     }else{
                         $html .= $this->renderLink($link);
                     }
