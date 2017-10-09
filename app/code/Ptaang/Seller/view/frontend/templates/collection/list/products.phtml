@@ -56,4 +56,8 @@ $sellerId = $block->getSellerId();
     <?php if ($block->getPagerHtml()): ?>
         <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
     <?php endif ?>
+<?php else: ?>
+    <div class="table-wrapper seller-product">
+        <p><?php /* @escapeNotVerified */ echo __('You have no products created') ?></p>
+    </div>
 <?php endif; ?>

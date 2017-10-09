@@ -14,19 +14,35 @@ class ActiveSeller {
     protected $_storeManager;
     protected $_customerRepositoryInterface; 
     protected $_logger;
+    
+    /**
+     * @var \Ptaang\Seller\Helper\Data
+     */
+    protected $helperSeller;        
 
+    /**
+     * ActiveSeller constructor.
+     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManagerInterface
+     * @param \Magento\Customer\Model\Session $customerRepositoryInterface
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Ptaang\Seller\Helper\Data $helperSeller     
+     */
     public function __construct(
         TransportBuilder $transportBuilder,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
         \Magento\Customer\Model\Session $customerRepositoryInterface,
-        \Psr\Log\LoggerInterface $logger
+        \Psr\Log\LoggerInterface $logger,
+        \Ptaang\Seller\Helper\Data $helperSeller        
     ) {
         $this->transportBuilder = $transportBuilder;
         $this->_scopeConfig  = $scopeConfig;
         $this->_storeManager = $storeManagerInterface;
         $this->_customerRepositoryInterface = $customerRepositoryInterface; 
         $this->_logger = $logger;
+        $this->helperSeller = $helperSeller;        
     }
 
     public function execute($customerData) {
@@ -65,7 +81,7 @@ class ActiveSeller {
         $postObject->setData($report);
 
         $transport = $this->transportBuilder
-            ->setTemplateIdentifier('activate_seller_template_front')
+            ->setTemplateIdentifier($this->helperSeller->getTemplateEmailActivateSeller())
             ->setTemplateOptions(['area' => \Magento\Framework\App\Area::AREA_FRONTEND, 'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID])
             ->setTemplateVars(['data' => $postObject])
             ->setFrom(['name' => $customerData->getName(),'email' => $customerData->getEmail()])

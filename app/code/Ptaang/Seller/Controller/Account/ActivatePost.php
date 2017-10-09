@@ -105,10 +105,7 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
             
             
         }
-        //echo "<pre>";
-        //print_r($params);
-        //echo "</pre>";
-        //return $resultPage;
+        
         $this->_redirect('customer/account');
     }
 }

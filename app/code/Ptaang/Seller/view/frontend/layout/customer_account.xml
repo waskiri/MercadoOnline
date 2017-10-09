@@ -25,5 +25,11 @@
                 <argument name="label" xsi:type="string">List of my Products</argument>
             </arguments>
         </block>
+        <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-my-product-sold">
+            <arguments>
+                <argument name="path" xsi:type="string">seller/account/productssold</argument>
+                <argument name="label" xsi:type="string">My Products Sold</argument>
+            </arguments>
+        </block>
     </referenceBlock>
 </page>

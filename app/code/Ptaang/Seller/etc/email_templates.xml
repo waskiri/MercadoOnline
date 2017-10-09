@@ -5,7 +5,7 @@
               file="activate_seller_template.html" type="html"
               module="Ptaang_Seller" area="frontend"/>
               
-    <template id="activate_seller_template_front"
+    <template id="seller_email_active_template_front"
               label="Activate Seller by Customer"
               file="activate_seller_template_front.html" type="html"
               module="Ptaang_Seller" area="frontend"/>

@@ -14,6 +14,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
     CONST XML_PATH_SENDER_SOLD_PRODUCT = "seller/email_sold/sender_email";
     CONST XML_PATH_EMAIL_SOLD_PRODUCT = "seller/email_sold/email_template";
+    CONST XML_PATH_EMAIL_ACTIVATE_SELLER_SEND = "seller/email_active/sender_email";
+    CONST XML_PATH_EMAIL_ACTIVATE_SELLER_TEMPLATE = "seller/email_active/template_front";
 
     /**
      * @var \Ptaang\Seller\Model\Seller
@@ -85,6 +87,28 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
     public function getSenderEmailSoldProduct(){
         return $this->scopeConfig->getValue(
             self::XML_PATH_SENDER_SOLD_PRODUCT,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+    
+    /**
+     * Get Email Send when a seller is activate
+     * @return string
+     */
+    public function getTemplateEmailActivateSellerSend(){
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_EMAIL_ACTIVATE_SELLER_SEND,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+    
+    /**
+     * Get Email Template when a seller is activate
+     * @return string
+     */
+    public function getTemplateEmailActivateSeller(){
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_EMAIL_ACTIVATE_SELLER_TEMPLATE,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

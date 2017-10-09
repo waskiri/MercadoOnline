@@ -12618,3 +12618,7 @@ Footer,"Pie de página",theme,frontend/Magento/luma
 "Pickup Date : ","Fecha de recojo:"
 "Pickup Time :  ","Hora de recojo:"
 "Sign up to be the first to hear about us","Regístrese para ser el primero en saber sobre nosotros"
+"My Products Sold","Mis Productos Vendidos",module,Ptaang_Seller
+"Save the product successfully.","Se Guardo el producto correctamente.",module,Ptaang_Seller
+"You have no products sold","No tienes productos vendidos",module,Ptaang_Seller
+"You have no products created","No tienes productos creados",module,Ptaang_Seller
