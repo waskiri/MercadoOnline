@@ -86,7 +86,8 @@ class ActivatePost extends \Magento\Customer\Controller\AbstractAccount
                                 'customer_id' => $customerId, 
                                 //'phone_mobile' => null, 
                                 //'phone_home' => null, 
-                                'nit' => $seller_params['nit']
+                                'nit' => $seller_params['nit'],
+                                'razon_social' => $seller_params['razon_social']
                                 )
                             )->save();
                             

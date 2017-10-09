@@ -37,6 +37,19 @@ class UpgradeSchema implements \Magento\Framework\Setup\UpgradeSchemaInterface {
                 'entity_id',
                 \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
             );
+        }else{
+            if (version_compare($context->getVersion(), '1.0.4') < 0){
+                $setup->getConnection()->addColumn(
+                    $setup->getTable('seller_entity'),
+                    'razon_social',
+                    [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => 30,
+                        'nullable' => false,
+                        'comment' => 'Razon Social'
+                    ]
+                );
+            }
         }
         $setup->endSetup();
     }
