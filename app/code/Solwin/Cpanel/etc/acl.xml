@@ -2,10 +2,10 @@
 <!--
 
 Solwin Infotech
-Solwin Sold Out Label Extension
+Solwin ScrolltoTop Extension
 
 @category   Solwin
-@package    Solwin_Soldout
+@package    Solwin_ScrolltoTop
 @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
 @license    https://www.solwininfotech.com/magento-extension-license/ 
 
@@ -14,13 +14,15 @@ Solwin Sold Out Label Extension
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Solwin_Soldout::extension" title="Solwin" sortOrder="12168231">
-                    <resource id="Solwin_Soldout::soldout" title="Sold Out" sortOrder="12168231" />
+                <resource id="Solwin_Cpanel::extension" title="Solwin" sortOrder="10">
+                    <resource id="Solwin_Cpanel::cpanel" title="Solwin Cpanel" sortOrder="45">
+                        <resource id="Solwin_Cpanel::cpanelmodule" title="Cpanel" sortOrder="50"/>
+                    </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Solwin_Soldout::outofstock_config" title="Sold Out Section"/>
+                            <resource id="Solwin_Cpael::cpanel" title="Solwin Cpanel Section"/>
                         </resource>
                     </resource>
                 </resource>
@@ -28,3 +30,4 @@ Solwin Sold Out Label Extension
         </resources>
     </acl>
 </config>
+

@@ -18,6 +18,17 @@ use Magento\Framework\App\Action\Action;
 <?php
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
+
+$outofstock_helper = $this->helper('Solwin\Soldout\Helper\Data');
+$outofstockEnable = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/enableoutofstock');
+$outofstockLabelImage = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/showstock_label_image');
+$outofstockTitle = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/titleoutofstock');
+$outofstockImage = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/imageoutofstock');
+$imageUrl = $outofstock_helper->getMediaUrl() . 'outofstockimage/' . $outofstockImage;
+$outofstockPositionLabel = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/showstock_position_label');
+$outofstockPositionImage = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/showstock_position_image');
+$outofstockImageHeight = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/imageheightoutofstock');
+$outofstockImagewidth = $outofstock_helper->getConfigValue('outofstock_product/outofstockproduct/imagewidthoutofstock');
 ?>
 <?php if (!$_productCollection->count()): ?>
     <div class="message info empty"><div><?php /* @escapeNotVerified */ echo __('We can\'t find products matching the selection.') ?></div></div>
@@ -61,6 +72,24 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
                         <?php } ?>
                         <a href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
                             <?php echo $productImage->toHtml(); ?>
+                            <?php
+                            if (!$_product->getIsSalable()):
+                                if ($outofstockEnable) {
+                                    if ($outofstockLabelImage == 'label') {
+                                        ?>
+                                        <div class="out-of-stock-wrapper <?php echo $outofstockPositionLabel; ?>"><?php echo $outofstockTitle; ?></div>
+                                        <?php
+                                    }
+                                    if ($outofstockLabelImage == 'image') {
+                                        if ($outofstockImage) {
+                                            ?>
+                                            <div class="out-of-stock-wrapper <?php echo $outofstockPositionImage; ?>"><img src="<?php echo $imageUrl; ?>" height="<?php echo $outofstockImageHeight; ?>" width="<?php echo $outofstockImagewidth; ?>"/></div>
+                                            <?php
+                                        }
+                                    }
+                                }
+                            endif;
+                            ?>
                         </a>
                         <?php if ($viewMode == 'grid') { ?>
                             <div class="pro-overlay"></div>

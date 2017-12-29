@@ -1,12 +1,12 @@
 /**
-* Solwin Infotech
-* Solwin ScrolltoTop Extension
-*
-* @category   Solwin
-* @package    Solwin_ScrolltoTop
-* @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
-* @license    https://www.solwininfotech.com/magento-extension-license/ 
-*/
+ * Solwin Infotech
+ * Solwin ScrolltoTop Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_ScrolltoTop
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
 
 require(['jquery'], function () {
     jQuery(document).ready(function () {

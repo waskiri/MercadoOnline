@@ -12,11 +12,14 @@ Solwin Sold Out Label Extension
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
     <system>
+        <tab id="soldout" translate="label" sortOrder="110">
+            <label>Sold Out Label</label>
+        </tab>
         <!-- for create section -->
         <section id="outofstock_product" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Sold Out Label</label>
             <!-- Assign section to tab -->
-            <tab>cpanel</tab>
+            <tab>soldout</tab>
             <resource>Solwin_Soldout::outofstock_config</resource>
             <!-- create group for fields in section -->
             <group id="outofstockproduct" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">

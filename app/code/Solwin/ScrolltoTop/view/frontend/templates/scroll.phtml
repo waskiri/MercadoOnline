@@ -32,14 +32,14 @@ if ($enable) {
     ?>
 
     <div id="scroll-to-top">
-        <a class="scrollup" href="#" title="<?php echo __('Scroll to Top'); ?>" style="<?php if ($position == 1) { ?> right:10px; <?php } else { ?> left:10px; <?php } ?> ">
+        <a class="scrollup" href="#" title="<?php echo __('Scroll to Top');?>" style="<?php if($position == 1) { ?> right:10px; <?php } else { ?> left:10px; <?php } ?> ">
             <?php
             if ($display == 2 || $display == 3) {
                 echo $imghtml;
             }
             ?>
             <?php if ($display == 1 || $display == 3) { ?>
-                <span style="<?php if ($display == 3) { ?> padding: 0 0 5px;display: block; <?php } else { ?> float: left;padding: 10px 0;text-align: center;width: 100%; <?php } ?>"><?php echo $text; ?></span>
+            <span style="<?php if($display == 3) { ?> padding: 0 0 5px;display: block; <?php } else { ?> float: left;padding: 10px 0;text-align: center;width: 100%; <?php } ?>"><?php echo $text; ?></span>
             <?php } ?>
         </a>
     </div>
@@ -52,13 +52,9 @@ if ($enable) {
         background-color: <?php echo $bgclr; ?>;
         border-color: <?php echo $bgclr; ?>;
     }
-
+    
     .scrollup:hover {
-        color:<?php echo $textHoverClr; ?>;
+        color:<?php echo $textHoverClr;  ?>;
         background-color: <?php echo $bgHoverClr; ?>;
-        border-color: <?php echo $bgHoverClr; ?>;
-    }
-    .scrollup:active,.scrollup:visited{
-        color:<?php echo $textclr; ?>;
     }
 </style>

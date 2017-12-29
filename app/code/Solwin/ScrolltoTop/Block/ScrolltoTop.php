@@ -1,13 +1,13 @@
 <?php
 /**
-* Solwin Infotech
-* Solwin ScrolltoTop Extension
-*
-* @category   Solwin
-* @package    Solwin_ScrolltoTop
-* @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
-* @license    https://www.solwininfotech.com/magento-extension-license/ 
-*/
+ * Solwin Infotech
+ * Solwin ScrolltoTop Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_ScrolltoTop
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/ 
+ */
 ?>
 <?php
 
@@ -19,7 +19,7 @@ class ScrolltoTop extends Template
 {
     
     /**
-     * get base url without store code
+     * Get base url without store code
      */
     public function getBaseUrl() {
         return $this->_storeManager
@@ -40,6 +40,5 @@ class ScrolltoTop extends Template
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         return $result;
     }
-    
-    
+   
 }

@@ -14,8 +14,8 @@ Solwin ScrolltoTop Extension
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Solwin_Base::elements" title="Scroll">
-                    <resource id="Solwin_ScrolltoTop::extension" title="Scroll To Top" sortOrder="118231"/>
+                <resource id="Solwin_Base::elements" title="Solwin" sortOrder="118234">
+                    <resource id="Solwin_ScrolltoTop::extension" title="Scroll To Top" sortOrder="118234"/>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">

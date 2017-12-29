@@ -11,5 +11,5 @@ Solwin ScrolltoTop Extension
 
 --> 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
-    <module name="Solwin_ScrolltoTop" setup_version="1.0.2"></module>
+    <module name="Solwin_ScrolltoTop" setup_version="1.0.3"></module>
 </config>

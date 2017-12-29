@@ -15,6 +15,10 @@ namespace Solwin\Soldout\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper 
 {
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
     protected $_storeManager;
     
     public function __construct(

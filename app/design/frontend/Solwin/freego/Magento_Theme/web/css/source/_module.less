@@ -75,20 +75,7 @@
     body {
         .lib-css(background-color, @page__background-color);
     }
-    .nav.item.seller {
 
-        a {
-            .lib-css(background-color, @base-color);
-            color: @color-white;
-            &:hover {
-                background-color: @base-color-light !important;
-            }
-        }
-
-    }
-    .cms-index-index .magestore-bannerslider-title {
-        display: none;
-    }
     //  ToDo UI: move it directly to .page-wrapper (now it doesn't appear in mediaquery cuz of size of css)
     .page-wrapper {
         .ie9 & {
@@ -129,15 +116,6 @@
                         @_link-color-active: @header-panel__text-active-color,
                         @_link-text-decoration-active: none
                         );
-                }
-                
-                &.public-now{
-                    a{
-                        background: #f2703e none repeat scroll 0 0;
-                        border-radius: 5px;
-                        font-weight: bold;
-                        padding: 5px;
-                    }
                 }
             }
         }

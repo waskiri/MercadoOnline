@@ -12,16 +12,15 @@ Solwin ScrolltoTop Extension
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
     <system>
-        <!-- for create section -->
-        <section id="scrollsection" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+        <tab id="scrolltotop" translate="label" sortOrder="100">
+            <label>Scroll To Top</label>
+        </tab>
+        <section id="scrollsection" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Scroll to Top</label>
-            <!-- Assign section to tab -->
-            <tab>cpanel</tab>
+            <tab>scrolltotop</tab>
             <resource>Solwin_ScrolltoTop::scrolltotop</resource>
-            <!--create group for fields in section--> 
             <group id="scrollgroup" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
-                <!--select field type--> 
                 <field id="active" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

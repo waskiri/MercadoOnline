@@ -14,10 +14,14 @@ Solwin Sold Out Label Extension
     <default>
         <outofstock_product>
             <outofstockproduct>
-                <enableoutofstock>1</enableoutofstock>
+                <enableoutofstock>0</enableoutofstock>
                 <showstock_label_image>label</showstock_label_image>
-                <titleoutofstock>Out Of Stock</titleoutofstock>
+                <showstock_position_label>ptop pleft</showstock_position_label>
+                <showstock_position_image>ptop pleft</showstock_position_image>
+                <titleoutofstock>Sold Out</titleoutofstock> 
                 <imageoutofstock></imageoutofstock>
+                <imagewidthoutofstock>60</imagewidthoutofstock>
+                <imageheightoutofstock>60</imageheightoutofstock>
             </outofstockproduct>
         </outofstock_product>
     </default>
