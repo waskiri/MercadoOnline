@@ -49,6 +49,8 @@ class SubscriptionTest extends Setup
 
         $this->assertEquals('12.34', $subscription->statusHistory[0]->price);
         $this->assertEquals('0.00', $subscription->statusHistory[0]->balance);
+        $this->assertEquals('USD', $subscription->statusHistory[0]->currencyIsoCode);
+        $this->assertEquals($plan['id'], $subscription->statusHistory[0]->planId);
         $this->assertEquals(Braintree\Subscription::ACTIVE, $subscription->statusHistory[0]->status);
         $this->assertEquals(Braintree\Subscription::API, $subscription->statusHistory[0]->subscriptionSource);
     }
@@ -1198,5 +1200,41 @@ class SubscriptionTest extends Setup
         $this->assertNotNull($transaction->processorAuthorizationCode);
         $this->assertEquals(Braintree\Transaction::SALE, $transaction->type);
         $this->assertEquals(Braintree\Transaction::AUTHORIZED, $transaction->status);
+    }
+
+    public function testRetryCharge_WithSubmitForSettlement()
+    {
+        $subscription = SubscriptionHelper::createSubscription();
+        $http = new Braintree\Http(Braintree\Configuration::$global);
+        $path = Braintree\Configuration::$global->merchantPath() . '/subscriptions/' . $subscription->id . '/make_past_due';
+        $http->put($path);
+
+        $result = Braintree\Subscription::retryCharge($subscription->id, null, true);
+
+        $this->assertTrue($result->success);
+        $transaction = $result->transaction;
+
+        $this->assertEquals($subscription->price, $transaction->amount);
+        $this->assertNotNull($transaction->processorAuthorizationCode);
+        $this->assertEquals(Braintree\Transaction::SALE, $transaction->type);
+        $this->assertEquals(Braintree\Transaction::SUBMITTED_FOR_SETTLEMENT, $transaction->status);
+    }
+
+    public function testRetryCharge_WithSubmitForSettlementAndAmount()
+    {
+        $subscription = SubscriptionHelper::createSubscription();
+        $http = new Braintree\Http(Braintree\Configuration::$global);
+        $path = Braintree\Configuration::$global->merchantPath() . '/subscriptions/' . $subscription->id . '/make_past_due';
+        $http->put($path);
+
+        $result = Braintree\Subscription::retryCharge($subscription->id, 1002, true);
+
+        $this->assertTrue($result->success);
+        $transaction = $result->transaction;
+
+        $this->assertEquals(1002, $transaction->amount);
+        $this->assertNotNull($transaction->processorAuthorizationCode);
+        $this->assertEquals(Braintree\Transaction::SALE, $transaction->type);
+        $this->assertEquals(Braintree\Transaction::SUBMITTED_FOR_SETTLEMENT, $transaction->status);
     }
 }

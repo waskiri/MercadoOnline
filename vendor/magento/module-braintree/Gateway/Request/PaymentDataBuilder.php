@@ -1,13 +1,13 @@
 <?php
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\Braintree\Gateway\Request;
 
 use Magento\Braintree\Gateway\Config\Config;
 use Magento\Braintree\Observer\DataAssignObserver;
-use Magento\Braintree\Gateway\Helper\SubjectReader;
+use Magento\Braintree\Gateway\SubjectReader;
 use Magento\Payment\Gateway\Request\BuilderInterface;
 use Magento\Payment\Helper\Formatter;
 
@@ -87,7 +87,7 @@ class PaymentDataBuilder implements BuilderInterface
             self::ORDER_ID => $order->getOrderIncrementId()
         ];
 
-        $merchantAccountId = $this->config->getMerchantAccountId();
+        $merchantAccountId = $this->config->getMerchantAccountId($order->getStoreId());
         if (!empty($merchantAccountId)) {
             $result[self::MERCHANT_ACCOUNT_ID] = $merchantAccountId;
         }

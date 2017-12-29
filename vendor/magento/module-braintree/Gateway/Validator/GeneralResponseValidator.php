@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\Braintree\Gateway\Validator;
@@ -8,7 +8,7 @@ namespace Magento\Braintree\Gateway\Validator;
 use Braintree\Result\Error;
 use Braintree\Result\Successful;
 use Magento\Payment\Gateway\Validator\AbstractValidator;
-use Magento\Braintree\Gateway\Helper\SubjectReader;
+use Magento\Braintree\Gateway\SubjectReader;
 use Magento\Payment\Gateway\Validator\ResultInterfaceFactory;
 
 class GeneralResponseValidator extends AbstractValidator

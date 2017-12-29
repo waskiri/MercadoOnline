@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -157,13 +157,15 @@ class OrderSave
 
                         if (isset($ratesIdQuoteItemId[$id])) {
                             foreach ($ratesIdQuoteItemId[$id] as $quoteItemId) {
-                                if ($quoteItemId['code'] == $tax['code']) {
+                                if ($quoteItemId['code'] === $tax['code']) {
                                     $itemId = null;
                                     $associatedItemId = null;
                                     if (isset($quoteItemId['id'])) {
                                         //This is a product item
                                         $item = $order->getItemByQuoteItemId($quoteItemId['id']);
-                                        $itemId = $item->getId();
+                                        if ($item !== null && $item->getId()) {
+                                            $itemId = $item->getId();
+                                        }
                                     } elseif (isset($quoteItemId['associated_item_id'])) {
                                         //This item is associated with a product item
                                         $item = $order->getItemByQuoteItemId($quoteItemId['associated_item_id']);

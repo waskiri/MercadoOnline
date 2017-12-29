@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -12,6 +12,8 @@ use Magento\Framework\App\ResourceConnection;
  * Collection of Magento\Quote\Model\Quote\Item
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @api
+ * @since 100.0.2
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
@@ -86,9 +88,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('Magento\Quote\Model\Quote\Item', 'Magento\Quote\Model\ResourceModel\Quote\Item');
+        $this->_init(\Magento\Quote\Model\Quote\Item::class, \Magento\Quote\Model\ResourceModel\Quote\Item::class);
     }
-
 
     /**
      * Prepare select query for products in carts report
@@ -191,7 +192,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             . ' AND product_name.attribute_id = ' . $productAttrNameId
             . ' AND product_name.store_id = ' . \Magento\Store\Model\Store::DEFAULT_STORE_ID,
             ['name' => 'product_name.value']
-        )->joinInner(
+        )->joinLeft(
             ['product_price' => $productAttrPrice->getBackend()->getTable()],
             "product_price.{$linkField} = main_table.{$linkField}"
             ." AND product_price.attribute_id = {$productAttrPriceId}",
